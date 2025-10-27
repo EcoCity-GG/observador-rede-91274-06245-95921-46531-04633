@@ -142,20 +142,6 @@ const Landing = () => {
       bgGradient: "from-red-500/10 to-rose-500/10"
     },
     {
-      icon: Shield,
-      title: "Conformidade LGPD",
-      description: "Monitoramento totalmente adequado à legislação de proteção de dados",
-      details: [
-        "Criptografia de dados de navegação",
-        "Consentimento informado dos usuários",
-        "Logs de auditoria para compliance",
-        "Relatórios para fiscalização"
-      ],
-      metric: "100%",
-      metricLabel: "Compliance LGPD",
-      gradient: "from-indigo-500 to-blue-500",
-      bgGradient: "from-indigo-500/10 to-blue-500/10"
-    }
   ];
 
   return (
@@ -805,10 +791,7 @@ const Landing = () => {
                 title: "Empresa",
                 links: ["Sobre", "Blog", "Casos de Uso", "Contato", "Parceiros"]
               },
-              {
-                title: "Legal",
-                links: ["Privacidade", "LGPD", "Termos", "Cookies", "Compliance"]
-              }
+
             ].map((section) => (
               <div key={section.title}>
                 <h4 className="font-semibold mb-6 text-lg">{section.title}</h4>
