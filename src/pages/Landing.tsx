@@ -559,36 +559,6 @@ const Landing = () => {
                           </div>
                         )}
 
-                        {index === 5 && (
-                          <div className="space-y-4">
-                            <div className="grid grid-cols-2 gap-3">
-                              {[
-                                { label: "Criptografia", icon: Lock },
-                                { label: "Auditoria", icon: FileText },
-                                { label: "ISO 27001", icon: Shield },
-                                { label: "SOC 2", icon: CheckCircle }
-                              ].map((cert, i) => (
-                                <div 
-                                  key={i}
-                                  className="p-4 bg-gradient-to-br from-muted to-muted/50 rounded-xl border border-border/50 text-center hover:scale-105 transition-transform"
-                                >
-                                  <cert.icon className="w-6 h-6 text-primary mx-auto mb-2" />
-                                  <div className="text-xs font-medium">{cert.label}</div>
-                                </div>
-                              ))}
-                            </div>
-                            <div className="p-4 bg-gradient-to-br from-green-500/10 to-emerald-500/10 rounded-xl border border-green-500/20">
-                              <div className="flex items-center gap-3">
-                                <CheckCircle className="w-6 h-6 text-green-500" />
-                                <div>
-                                  <div className="font-medium text-sm">100% Compliant</div>
-                                  <div className="text-xs text-muted-foreground">LGPD Certificado</div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        )}
-
                         <div className="pt-4 border-t border-border/50 flex items-center justify-between">
                           <div className="flex items-center gap-2">
                             <div className={`w-8 h-8 rounded-lg bg-gradient-to-br ${feature.gradient} flex items-center justify-center`}>
