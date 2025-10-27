@@ -22,15 +22,15 @@ import {
   ArrowRight,
   Sparkles,
   Brain,
-  Server,
-  Layers
+  Search,
+  Filter
 } from "lucide-react";
 
 const statsDisplay = [
-  { number: "99.9%", label: "Uptime" },
-  { number: "24/7", label: "Suporte" },
+  { number: "99.9%", label: "Precisão" },
+  { number: "24/7", label: "Monitoramento" },
   { number: "500+", label: "Empresas" },
-  { number: "<1s", label: "Latência" }
+  { number: "<1s", label: "Detecção" }
 ];
 
 const Landing = () => {
@@ -69,87 +69,87 @@ const Landing = () => {
     {
       icon: Eye,
       title: "Monitoramento em Tempo Real",
-      description: "Acompanhe todas as atividades de navegação com atualizações instantâneas",
+      description: "Acompanhe todos os sites acessados pelos usuários com atualizações instantâneas",
       details: [
-        "Dashboard em tempo real com zero latência",
-        "Histórico completo de navegação armazenado",
-        "Filtros avançados por usuário, horário e categoria",
-        "Visualização de sessões ativas simultâneas"
+        "Registro completo de URLs visitadas",
+        "Histórico detalhado de navegação por usuário",
+        "Filtros por data, horário e categoria de site",
+        "Visualização de acessos ativos em tempo real"
       ],
       metric: "< 100ms",
-      metricLabel: "Tempo de resposta",
+      metricLabel: "Tempo de detecção",
       gradient: "from-blue-500 to-cyan-500",
       bgGradient: "from-blue-500/10 to-cyan-500/10"
     },
     {
       icon: AlertTriangle,
-      title: "Alertas Inteligentes",
-      description: "Notificações automáticas para acessos indevidos e comportamentos suspeitos",
+      title: "Alertas de Sites Indevidos",
+      description: "Notificações automáticas quando usuários acessam sites bloqueados ou suspeitos",
       details: [
-        "Detecção de padrões anômalos com IA",
-        "Notificações instantâneas por email e SMS",
-        "Regras customizáveis por departamento",
-        "Escalação automática para gestores"
+        "Detecção instantânea de sites não permitidos",
+        "Alertas por email, SMS e dashboard",
+        "Categorização automática de sites (redes sociais, jogos, adulto)",
+        "Regras personalizadas por departamento ou usuário"
       ],
       metric: "98.5%",
-      metricLabel: "Precisão de alertas",
+      metricLabel: "Taxa de detecção",
       gradient: "from-amber-500 to-orange-500",
       bgGradient: "from-amber-500/10 to-orange-500/10"
     },
     {
       icon: BarChart3,
       title: "Dashboard Analítico",
-      description: "Visualize dados através de gráficos interativos e relatórios detalhados",
+      description: "Visualize padrões de navegação através de gráficos e relatórios detalhados",
       details: [
-        "Gráficos interativos com drill-down",
-        "Métricas de produtividade e compliance",
-        "Comparativos entre períodos e equipes",
-        "Exportação em múltiplos formatos"
+        "Gráficos de sites mais acessados",
+        "Análise de produtividade por usuário",
+        "Comparativos entre períodos",
+        "Identificação de tendências de acesso"
       ],
       metric: "50+",
-      metricLabel: "Métricas disponíveis",
+      metricLabel: "Tipos de relatórios",
       gradient: "from-purple-500 to-pink-500",
       bgGradient: "from-purple-500/10 to-pink-500/10"
     },
     {
       icon: Users,
       title: "Gestão de Usuários",
-      description: "Controle individual ou em grupo com diferentes níveis de permissão",
+      description: "Monitore individualmente ou em grupos com diferentes políticas de acesso",
       details: [
-        "Hierarquia de permissões multi-nível",
-        "Grupos dinâmicos por departamento",
-        "Integração com Active Directory/LDAP",
-        "Auditoria completa de ações administrativas"
+        "Perfis de monitoramento personalizados",
+        "Grupos por departamento ou função",
+        "Políticas de acesso diferenciadas",
+        "Histórico individual de navegação"
       ],
       metric: "10k+",
-      metricLabel: "Usuários suportados",
+      metricLabel: "Usuários monitorados",
       gradient: "from-green-500 to-emerald-500",
       bgGradient: "from-green-500/10 to-emerald-500/10"
     },
     {
       icon: FileText,
-      title: "Relatórios Customizáveis",
-      description: "Exporte dados filtrados por período, usuário ou categoria de acesso",
+      title: "Relatórios de Navegação",
+      description: "Exporte dados de acesso filtrados por período, usuário ou categoria",
       details: [
-        "Templates pré-configurados para compliance",
+        "Relatórios de conformidade e produtividade",
+        "Exportação em PDF, Excel e CSV",
         "Agendamento automático de relatórios",
-        "Suporte para PDF, Excel, CSV e JSON",
-        "Relatórios com marca d'água personalizada"
+        "Análise de sites mais visitados"
       ],
       metric: "100+",
-      metricLabel: "Templates disponíveis",
+      metricLabel: "Templates de relatório",
       gradient: "from-red-500 to-rose-500",
       bgGradient: "from-red-500/10 to-rose-500/10"
     },
     {
       icon: Shield,
       title: "Conformidade LGPD",
-      description: "Solução totalmente adequada à legislação de proteção de dados",
+      description: "Monitoramento totalmente adequado à legislação de proteção de dados",
       details: [
-        "Criptografia end-to-end de todos os dados",
-        "Anonimização automática quando necessário",
-        "Logs de auditoria imutáveis",
-        "Certificações ISO 27001 e SOC 2"
+        "Criptografia de dados de navegação",
+        "Consentimento informado dos usuários",
+        "Logs de auditoria para compliance",
+        "Relatórios para fiscalização"
       ],
       metric: "100%",
       metricLabel: "Compliance LGPD",
@@ -179,15 +179,16 @@ const Landing = () => {
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-12">
               <div className="flex items-center gap-3 group cursor-pointer" onClick={() => navigate("/")}>
-                <div className="relative w-12 h-12 bg-gradient-to-br from-primary to-secondary rounded-xl flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300">
-                  <Shield className="w-6 h-6 text-white relative z-10" />
-                  <div className="absolute inset-0 bg-gradient-to-br from-primary to-secondary rounded-xl blur opacity-50 group-hover:opacity-75 transition-opacity" />
-                </div>
+                <img 
+                  src="https://i.ibb.co/gF7msvyr/LOGO-PERFIL-1.png" 
+                  alt="MonitorPro Logo" 
+                  className="w-12 h-12 rounded-xl shadow-lg hover:shadow-xl hover:scale-110 transition-all duration-300"
+                />
                 <div className="flex flex-col">
                   <span className="font-bold text-xl bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-                    NexusCore Security
+                    MonitorPro
                   </span>
-                  <span className="text-xs text-muted-foreground -mt-1">Real-time Protection</span>
+                  <span className="text-xs text-muted-foreground -mt-1">Web Access Monitor</span>
                 </div>
               </div>
               
@@ -228,20 +229,20 @@ const Landing = () => {
               <div className="space-y-4">
                 <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-medium animate-pulse">
                   <Sparkles className="w-4 h-4" />
-                  Solução Empresarial de Monitoramento
+                  Monitoramento Inteligente de Navegação Web
                 </div>
                 <h1 className="text-5xl lg:text-7xl font-bold leading-tight">
-                  Controle Total de{" "}
+                  Monitore Acessos{" "}
                   <span className="relative inline-block">
                     <span className="bg-gradient-to-r from-primary via-secondary to-primary bg-clip-text text-transparent animate-gradient bg-[length:200%_auto]">
-                      Acessos Web
+                      Web em Tempo Real
                     </span>
                     <div className="absolute -inset-1 bg-gradient-to-r from-primary to-secondary blur-2xl opacity-20 -z-10" />
                   </span>
                 </h1>
                 <p className="text-xl text-muted-foreground leading-relaxed max-w-lg">
-                  Monitoramento inteligente de navegação para empresas e escolas. 
-                  Detecte, classifique e alerte sobre acessos indevidos em tempo real com IA.
+                  Solução completa para empresas e escolas monitorarem sites acessados, 
+                  detectarem conteúdo indevido e garantirem produtividade através de alertas inteligentes.
                 </p>
               </div>
 
@@ -292,7 +293,7 @@ const Landing = () => {
                   </div>
                   <div className="text-sm text-muted-foreground ml-2 flex items-center gap-2">
                     <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-                    Dashboard - Visão Geral
+                    Monitoramento Ativo
                   </div>
                 </div>
                 
@@ -307,8 +308,8 @@ const Landing = () => {
                       <div className="text-xs text-muted-foreground">Alertas</div>
                     </div>
                     <div className="bg-gradient-to-br from-green-500/20 to-green-500/5 rounded-lg p-3 text-center border border-green-500/20 hover:scale-105 transition-transform">
-                      <div className="text-lg font-bold text-green-600">{stats?.aiDetections || 89}</div>
-                      <div className="text-xs text-muted-foreground">IA Detectada</div>
+                      <div className="text-lg font-bold text-green-600">1,284</div>
+                      <div className="text-xs text-muted-foreground">Sites/hora</div>
                     </div>
                   </div>
                   
@@ -321,15 +322,15 @@ const Landing = () => {
                     <div className="flex justify-between text-sm">
                       <span className="text-muted-foreground flex items-center gap-2">
                         <Clock className="w-4 h-4" />
-                        Acessos Recentes
+                        Sites Acessados Recentemente
                       </span>
                       <span className="text-primary hover:underline cursor-pointer">Ver todos →</span>
                     </div>
                     <div className="space-y-1">
                       {[
-                        { site: "chatgpt.com", status: "IA", color: "green" },
-                        { site: "instagram.com", status: "Alerta", color: "amber" },
-                        { site: "youtube.com", status: "Alerta", color: "amber" }
+                        { site: "facebook.com", status: "Bloqueado", color: "red" },
+                        { site: "youtube.com", status: "Alerta", color: "amber" },
+                        { site: "linkedin.com", status: "Permitido", color: "green" }
                       ].map((item, index) => (
                         <div 
                           key={item.site} 
@@ -361,13 +362,13 @@ const Landing = () => {
           <div className="text-center mb-20">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-medium mb-6">
               <Sparkles className="w-4 h-4" />
-              Tecnologia de Ponta
+              Recursos Completos
             </div>
             <h2 className="text-5xl font-bold mb-6">
-              Recursos <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">Avançados</span>
+              Recursos <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">de Monitoramento</span>
             </h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-              Tecnologia de ponta com inteligência artificial para garantir o controle e segurança total da navegação corporativa e educacional
+              Controle completo sobre acessos web com tecnologia avançada para detectar sites indevidos e garantir produtividade
             </p>
           </div>
           
@@ -449,16 +450,17 @@ const Landing = () => {
                         {index === 0 && (
                           <div className="space-y-4">
                             <div className="grid grid-cols-3 gap-3">
-                              {[1, 2, 3].map((i) => (
-                                <div key={i} className={`h-24 bg-gradient-to-br ${feature.bgGradient} rounded-xl border border-border/50 flex items-center justify-center`}>
-                                  <Activity className="w-6 h-6 text-primary animate-pulse" style={{ animationDelay: `${i * 200}ms` }} />
+                              {["Sites Visitados", "URLs Únicas", "Tempo Online"].map((label, i) => (
+                                <div key={i} className={`h-24 bg-gradient-to-br ${feature.bgGradient} rounded-xl border border-border/50 flex flex-col items-center justify-center`}>
+                                  <Eye className="w-6 h-6 text-primary animate-pulse mb-2" style={{ animationDelay: `${i * 200}ms` }} />
+                                  <div className="text-xs text-muted-foreground text-center px-1">{label}</div>
                                 </div>
                               ))}
                             </div>
                             <div className="h-32 bg-gradient-to-br from-muted to-muted/50 rounded-xl border border-border/50 flex items-center justify-center">
                               <div className="text-center">
                                 <div className="text-2xl font-bold text-primary">1,284</div>
-                                <div className="text-xs text-muted-foreground">Eventos/segundo</div>
+                                <div className="text-xs text-muted-foreground">Sites monitorados hoje</div>
                               </div>
                             </div>
                           </div>
@@ -467,16 +469,16 @@ const Landing = () => {
                         {index === 1 && (
                           <div className="space-y-3">
                             {[
-                              { label: "Acesso Bloqueado", severity: "high", time: "Agora" },
-                              { label: "Padrão Suspeito", severity: "medium", time: "2 min atrás" },
-                              { label: "Novo Dispositivo", severity: "low", time: "5 min atrás" }
+                              { label: "Redes Sociais Bloqueadas", severity: "high", time: "Agora" },
+                              { label: "Site de Jogos Detectado", severity: "medium", time: "2 min atrás" },
+                              { label: "Conteúdo Impróprio", severity: "high", time: "5 min atrás" }
                             ].map((alert, i) => (
                               <div 
                                 key={i}
                                 className="flex items-center gap-3 p-4 bg-muted/50 rounded-xl border border-border/50 hover:bg-muted transition-colors"
                                 style={{ animationDelay: `${i * 150}ms` }}
                               >
-                                <AlertTriangle className={`w-5 h-5 ${alert.severity === 'high' ? 'text-red-500' : alert.severity === 'medium' ? 'text-amber-500' : 'text-blue-500'} animate-pulse`} />
+                                <AlertTriangle className={`w-5 h-5 ${alert.severity === 'high' ? 'text-red-500' : 'text-amber-500'} animate-pulse`} />
                                 <div className="flex-1">
                                   <div className="font-medium text-sm">{alert.label}</div>
                                   <div className="text-xs text-muted-foreground">{alert.time}</div>
@@ -491,8 +493,8 @@ const Landing = () => {
                           <div className="space-y-4">
                             <div className="grid grid-cols-2 gap-3">
                               {[
-                                { label: "Produtividade", value: "87%", color: "green" },
-                                { label: "Compliance", value: "95%", color: "blue" }
+                                { label: "Sites Produtivos", value: "67%", color: "green" },
+                                { label: "Sites Bloqueados", value: "12%", color: "red" }
                               ].map((metric, i) => (
                                 <div key={i} className="p-4 bg-gradient-to-br from-muted to-muted/50 rounded-xl border border-border/50">
                                   <div className={`text-2xl font-bold text-${metric.color}-500`}>{metric.value}</div>
@@ -510,9 +512,9 @@ const Landing = () => {
                         {index === 3 && (
                           <div className="space-y-3">
                             {[
-                              { name: "Equipe Marketing", users: 24 },
-                              { name: "Desenvolvimento", users: 18 },
-                              { name: "Administrativo", users: 12 }
+                              { name: "Marketing", sites: 234 },
+                              { name: "Desenvolvimento", sites: 189 },
+                              { name: "Administrativo", sites: 156 }
                             ].map((teamData, i) => (
                               <div 
                                 key={i}
@@ -522,7 +524,7 @@ const Landing = () => {
                                 <Users className="w-5 h-5 text-primary" />
                                 <div className="flex-1">
                                   <div className="font-medium text-sm">{teamData.name}</div>
-                                  <div className="text-xs text-muted-foreground">{teamData.users} usuários</div>
+                                  <div className="text-xs text-muted-foreground">{teamData.sites} sites acessados hoje</div>
                                 </div>
                                 <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
                               </div>
@@ -545,8 +547,8 @@ const Landing = () => {
                             </div>
                             <div className="p-4 bg-muted/50 rounded-xl border border-border/50">
                               <div className="flex items-center justify-between mb-3">
-                                <span className="text-sm font-medium">Relatório Mensal</span>
-                                <span className="text-xs text-muted-foreground">Agendado</span>
+                                <span className="text-sm font-medium">Relatório de Acessos</span>
+                                <span className="text-xs text-muted-foreground">Último mês</span>
                               </div>
                               <div className="space-y-2">
                                 <div className="h-2 bg-primary/20 rounded-full overflow-hidden">
@@ -615,35 +617,35 @@ const Landing = () => {
           <div className="text-center mb-16">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-medium mb-6">
               <Brain className="w-4 h-4" />
-              Tecnologia de Ponta
+              Tecnologia Avançada
             </div>
             <h2 className="text-5xl font-bold mb-6">
-              Infraestrutura <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">Robusta</span>
+              Como Funciona o <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">Monitoramento</span>
             </h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Construído com as tecnologias mais avançadas do mercado
+              Sistema inteligente que rastreia e analisa todos os acessos web em tempo real
             </p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
             {[
               {
-                icon: Brain,
-                title: "IA & Machine Learning",
-                description: "Detecção inteligente de padrões e anomalias com aprendizado contínuo",
+                icon: Search,
+                title: "Detecção Automática",
+                description: "Captura cada URL acessada pelos usuários através de extensão de navegador",
                 gradient: "from-purple-500 to-pink-500"
               },
               {
-                icon: Server,
-                title: "Cloud Native",
-                description: "Infraestrutura escalável em nuvem com alta disponibilidade",
+                icon: Filter,
+                title: "Categorização Inteligente",
+                description: "IA classifica sites automaticamente em categorias (social, produtivo, impróprio)",
                 gradient: "from-blue-500 to-cyan-500"
               },
               {
-                icon: Layers,
-                title: "Arquitetura Modular",
-                description: "Sistema flexível e expansível para atender suas necessidades",
-                gradient: "from-green-500 to-emerald-500"
+                icon: AlertTriangle,
+                title: "Alertas Instantâneos",
+                description: "Notificações em tempo real quando detecta acesso a sites bloqueados",
+                gradient: "from-red-500 to-orange-500"
               }
             ].map((tech, index) => (
               <div
@@ -672,11 +674,11 @@ const Landing = () => {
           <div className="text-center mb-20">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-medium mb-6">
               <Zap className="w-4 h-4" />
-              Processo Simplificado
+              Implementação Rápida
             </div>
-            <h2 className="text-5xl font-bold mb-6">Como Funciona</h2>
+            <h2 className="text-5xl font-bold mb-6">Como Começar</h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Implementação simples e resultados imediatos em apenas 3 passos
+              Configure o monitoramento de acessos em apenas 3 passos simples
             </p>
           </div>
           
@@ -684,22 +686,22 @@ const Landing = () => {
             {[
               { 
                 step: "01", 
-                title: "Instalação", 
-                description: "Implemente nossa extensão em navegadores corporativos em minutos",
+                title: "Instale a Extensão", 
+                description: "Adicione nossa extensão nos navegadores dos usuários que deseja monitorar",
                 icon: Globe,
                 gradient: "from-blue-500 to-cyan-500"
               },
               { 
                 step: "02", 
-                title: "Configuração", 
-                description: "Defina categorias e políticas de acesso personalizadas para sua organização",
+                title: "Configure Políticas", 
+                description: "Defina quais categorias de sites devem gerar alertas (redes sociais, jogos, etc)",
                 icon: Shield,
                 gradient: "from-purple-500 to-pink-500"
               },
               { 
                 step: "03", 
-                title: "Monitoramento", 
-                description: "Acompanhe dados em tempo real pelo dashboard inteligente",
+                title: "Monitore em Tempo Real", 
+                description: "Acompanhe todos os acessos web e receba alertas instantâneos via dashboard",
                 icon: Activity,
                 gradient: "from-green-500 to-emerald-500"
               }
@@ -716,7 +718,7 @@ const Landing = () => {
                   </div>
                   
                   <div className={`inline-flex items-center justify-center px-4 py-2 rounded-full bg-gradient-to-r ${item.gradient} text-white font-bold mb-4 text-sm`}>
-                    ETAPA {item.step}
+                    PASSO {item.step}
                   </div>
                   
                   <h3 className="text-2xl font-bold mb-4 group-hover:text-primary transition-colors">
@@ -744,11 +746,11 @@ const Landing = () => {
             </div>
             
             <h2 className="text-5xl lg:text-6xl font-bold text-white leading-tight">
-              Pronto para Transformar seu<br />Controle de Acesso?
+              Pronto para Monitorar<br />Acessos Web com Inteligência?
             </h2>
             
             <p className="text-xl text-white/90 max-w-2xl mx-auto leading-relaxed">
-              Junte-se a centenas de empresas e escolas que já utilizam nossa solução para garantir segurança e produtividade
+              Junte-se a centenas de empresas e escolas que já protegem sua produtividade monitorando sites indevidos
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center pt-8">
@@ -758,7 +760,7 @@ const Landing = () => {
                 size="lg"
               >
                 <Zap className="w-5 h-5 mr-2 group-hover:rotate-12 transition-transform" />
-                Começar Gratuitamente
+                Começar Monitoramento
               </Button>
               <Button 
                 variant="outline"
@@ -766,16 +768,16 @@ const Landing = () => {
                 size="lg"
               >
                 <FileText className="w-5 h-5 mr-2" />
-                Agendar Demonstração
+                Ver Demo ao Vivo
               </Button>
             </div>
 
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8 pt-16">
               {[
-                { number: "500+", label: "Empresas Confiantes" },
-                { number: "50k+", label: "Usuários Ativos" },
-                { number: "99.9%", label: "Disponibilidade" },
-                { number: "24/7", label: "Suporte Premium" }
+                { number: "500+", label: "Empresas Monitorando" },
+                { number: "50k+", label: "Usuários Rastreados" },
+                { number: "99.9%", label: "Taxa de Detecção" },
+                { number: "24/7", label: "Monitoramento Ativo" }
               ].map((stat, index) => (
                 <div 
                   key={stat.label}
@@ -796,19 +798,21 @@ const Landing = () => {
           <div className="grid md:grid-cols-4 gap-12 mb-12">
             <div className="md:col-span-2">
               <div className="flex items-center gap-3 mb-6">
-                <div className="relative w-12 h-12 bg-gradient-to-br from-primary to-secondary rounded-xl flex items-center justify-center shadow-lg">
-                  <Shield className="w-6 h-6 text-white relative z-10" />
-                  <div className="absolute inset-0 bg-gradient-to-br from-primary to-secondary rounded-xl blur opacity-50" />
-                </div>
+                <img 
+                  src="https://i.ibb.co/gF7msvyr/LOGO-PERFIL-1.png" 
+                  alt="MonitorPro Logo" 
+                  className="w-12 h-12 rounded-xl shadow-lg"
+                />
                 <div>
                   <span className="font-bold text-xl bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-                    NexusCore Security
+                    MonitorPro
                   </span>
-                  <div className="text-xs text-muted-foreground">Real-time Protection</div>
+                  <div className="text-xs text-muted-foreground">Web Access Monitor</div>
                 </div>
               </div>
               <p className="text-muted-foreground leading-relaxed max-w-md mb-6">
-                Solução completa de monitoramento e controle de acesso web para empresas e instituições de ensino. Protegendo sua organização 24/7.
+                Solução completa de monitoramento de acessos web para empresas e instituições de ensino. 
+                Detecte sites indevidos e garanta produtividade 24/7.
               </p>
               <div className="flex gap-4">
                 {[Globe, Shield, Lock].map((Icon, index) => (
@@ -825,15 +829,15 @@ const Landing = () => {
             {[
               {
                 title: "Produto",
-                links: ["Recursos", "Dashboard", "Preços", "API", "Integrações"]
+                links: ["Recursos", "Dashboard", "Preços", "API", "Extensão"]
               },
               {
                 title: "Empresa",
-                links: ["Sobre", "Blog", "Carreiras", "Contato", "Parceiros"]
+                links: ["Sobre", "Blog", "Casos de Uso", "Contato", "Parceiros"]
               },
               {
                 title: "Legal",
-                links: ["Privacidade", "LGPD", "Termos", "Cookies", "Segurança"]
+                links: ["Privacidade", "LGPD", "Termos", "Cookies", "Compliance"]
               }
             ].map((section) => (
               <div key={section.title}>
@@ -858,12 +862,12 @@ const Landing = () => {
           <div className="pt-8 border-t border-border">
             <div className="flex flex-col md:flex-row items-center justify-between gap-4">
               <span className="text-sm text-muted-foreground">
-                © 2025 NexusCore Security. Todos os direitos reservados.
+                © 2025 MonitorPro. Todos os direitos reservados.
               </span>
               <div className="flex items-center gap-6 text-sm text-muted-foreground">
                 <span className="flex items-center gap-2">
                   <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-                  Todos os sistemas operacionais
+                  Sistema de monitoramento ativo
                 </span>
                 <span>|</span>
                 <span>Feito com ❤️ no Brasil</span>
