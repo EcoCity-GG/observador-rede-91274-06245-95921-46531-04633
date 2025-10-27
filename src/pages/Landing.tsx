@@ -76,13 +76,6 @@ const Landing = () => {
     }
   ];
 
-  const statsDisplay = [
-    { number: "99.9%", label: "Precisão na Classificação" },
-    { number: "< 2s", label: "Tempo de Resposta" },
-    { number: "500+", label: "Categorias de Sites" },
-    { number: "24/7", label: "Monitoramento Contínuo" }
-  ];
-
   return (
     <div className="min-h-screen bg-background overflow-hidden">
       {/* VLibras accessibility */}
