@@ -4,13 +4,13 @@ import { ThemeToggle } from "@/components/ThemeToggle";
 import { LanguageSelector } from "@/components/LanguageSelector";
 import { CookieBanner } from "@/components/CookieBanner";
 import { useEffect, useState } from "react";
-import { useDashboardData } from "@/hooks/useDashboardData";
-import { 
-  Shield, 
-  Eye, 
-  AlertTriangle, 
-  BarChart3, 
-  Users, 
+import { useDashboardData } from "@/hooks/useDashboardData"; //
+import {
+  Shield,
+  Eye,
+  AlertTriangle,
+  BarChart3,
+  Users,
   FileText,
   Zap,
   Globe,
@@ -31,31 +31,31 @@ const statsDisplay = [
   { number: "24/7", label: "Monitoramento" },
   { number: "500+", label: "Empresas" },
   { number: "<1s", label: "Detecção" }
-];
+]; //
 
 const Landing = () => {
   const navigate = useNavigate();
   const [isVisible, setIsVisible] = useState(false);
   const [activeFeature, setActiveFeature] = useState(0);
-  const { data } = useDashboardData();
-  const stats = data ? { totalUsers: data.summary.length, totalAlerts: 0, aiDetections: 0 } : null;
+  const { data } = useDashboardData(); //
+  const stats = data ? { totalUsers: data.summary.length, totalAlerts: 0, aiDetections: 0 } : null; //
 
   useEffect(() => {
     setIsVisible(true);
-    
+
     const script = document.createElement("script");
-    script.src = "https://vlibras.gov.br/app/vlibras-plugin.js";
+    script.src = "https://vlibras.gov.br/app/vlibras-plugin.js"; //
     script.async = true;
     document.body.appendChild(script);
 
     script.onload = () => {
       // @ts-ignore
-      new window.VLibras.Widget("https://vlibras.gov.br/app");
+      new window.VLibras.Widget("https://vlibras.gov.br/app"); //
     };
 
     const interval = setInterval(() => {
-      setActiveFeature((prev) => (prev + 1) % 6);
-    }, 5000);
+      setActiveFeature((prev) => (prev + 1) % 5); // Atualizado para 5 features
+    }, 5000); //
 
     return () => {
       if (script.parentNode) {
@@ -63,7 +63,7 @@ const Landing = () => {
       }
       clearInterval(interval);
     };
-  }, []);
+  }, []); //
 
   const features = [
     {
@@ -141,7 +141,7 @@ const Landing = () => {
       gradient: "from-red-500 to-rose-500",
       bgGradient: "from-red-500/10 to-rose-500/10"
     }
-  ];
+  ]; //
 
   return (
     <div className="min-h-screen bg-background overflow-hidden">
@@ -152,6 +152,7 @@ const Landing = () => {
         </div>
       </div>
 
+      {/* Background Effects */}
       <div className="fixed inset-0 -z-10">
         <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-primary/5" />
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl animate-pulse" />
@@ -159,15 +160,17 @@ const Landing = () => {
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#8882_1px,transparent_1px),linear-gradient(to_bottom,#8882_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,#000_70%,transparent_110%)]" />
       </div>
 
+      {/* Navigation */}
       <nav className="bg-background/80 backdrop-blur-xl border-b border-border/50 sticky top-0 z-50">
-        <div className="container mx-auto px-6 py-4">
+        {/* ... (código da navegação permanece o mesmo) ... */}
+         <div className="container mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-12">
               <div className="flex items-center gap-3 group cursor-pointer" onClick={() => navigate("/")}>
-                <img 
-                  src="https://i.ibb.co/gF7msvyr/LOGO-PERFIL-1.png" 
-                  alt="MonitorPro Logo" 
-                  className="w-12 h-12 rounded-xl shadow-lg hover:shadow-xl hover:scale-110 transition-all duration-300"
+                <img
+                  src="https://i.ibb.co/gF7msvyr/LOGO-PERFIL-1.png" //
+                  alt="MonitorPro Logo"
+                  className="w-12 h-12 rounded-xl shadow-lg hover:shadow-xl hover:scale-110 transition-all duration-300" //
                 />
                 <div className="flex flex-col">
                   <span className="font-bold text-xl bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
@@ -176,9 +179,9 @@ const Landing = () => {
                   <span className="text-xs text-muted-foreground -mt-1">Web Access Monitor</span>
                 </div>
               </div>
-              
+
               <div className="hidden lg:flex items-center gap-8">
-                {["Home", "Recursos", "Dashboard", "Preços", "Contato"].map((item) => (
+                {["Home", "Recursos", "Dashboard", "Preços", "Contato"].map((item) => ( //
                   <a
                     key={item}
                     href={`#${item.toLowerCase()}`}
@@ -194,9 +197,9 @@ const Landing = () => {
             <div className="flex items-center gap-4">
               <LanguageSelector />
               <ThemeToggle />
-              <Button 
+              <Button
                 onClick={() => navigate("/dashboard")}
-                className="relative rounded-xl px-6 shadow-lg hover:shadow-xl transition-all duration-300 group overflow-hidden bg-gradient-to-r from-primary to-secondary"
+                className="relative rounded-xl px-6 shadow-lg hover:shadow-xl transition-all duration-300 group overflow-hidden bg-gradient-to-r from-primary to-secondary" //
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-secondary to-primary opacity-0 group-hover:opacity-100 transition-opacity" />
                 <Zap className="w-4 h-4 mr-2 relative z-10 group-hover:rotate-12 transition-transform" />
@@ -207,10 +210,13 @@ const Landing = () => {
         </div>
       </nav>
 
+      {/* Hero Section */}
       <section id="home" className="relative pt-20 pb-32">
         <div className="container mx-auto px-6">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
+            {/* Left Column: Text Content */}
             <div className={`space-y-8 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+              {/* ... (código do conteúdo de texto permanece o mesmo) ... */}
               <div className="space-y-4">
                 <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-medium animate-pulse">
                   <Sparkles className="w-4 h-4" />
@@ -226,24 +232,24 @@ const Landing = () => {
                   </span>
                 </h1>
                 <p className="text-xl text-muted-foreground leading-relaxed max-w-lg">
-                  Solução completa para empresas e escolas monitorarem sites acessados, 
+                  Solução completa para empresas e escolas monitorarem sites acessados,
                   detectarem conteúdo indevido e garantirem produtividade através de alertas inteligentes.
                 </p>
               </div>
 
               <div className="flex flex-col sm:flex-row gap-4">
-                <Button 
+                <Button
                   onClick={() => navigate("/dashboard")}
-                  className="relative rounded-xl px-8 py-6 text-lg shadow-lg hover:shadow-2xl transition-all duration-300 group overflow-hidden bg-gradient-to-r from-primary to-secondary"
+                  className="relative rounded-xl px-8 py-6 text-lg shadow-lg hover:shadow-2xl transition-all duration-300 group overflow-hidden bg-gradient-to-r from-primary to-secondary" //
                   size="lg"
                 >
                   <div className="absolute inset-0 bg-gradient-to-r from-secondary to-primary opacity-0 group-hover:opacity-100 transition-opacity" />
                   <Activity className="w-5 h-5 mr-2 relative z-10 group-hover:scale-110 transition-transform" />
                   <span className="relative z-10">Acessar a Demo</span>
                 </Button>
-                <Button 
+                <Button
                   variant="outline"
-                  className="rounded-xl px-8 py-6 text-lg border-2 hover:border-primary hover:bg-primary/5 transition-all duration-300 group"
+                  className="rounded-xl px-8 py-6 text-lg border-2 hover:border-primary hover:bg-primary/5 transition-all duration-300 group" //
                   size="lg"
                 >
                   <FileText className="w-5 h-5 mr-2 group-hover:rotate-12 transition-transform" />
@@ -252,9 +258,9 @@ const Landing = () => {
               </div>
 
               <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 pt-8">
-                {statsDisplay.map((stat, index) => (
-                  <div 
-                    key={stat.label} 
+                {statsDisplay.map((stat, index) => ( //
+                  <div
+                    key={stat.label}
                     className="text-center group cursor-pointer"
                     style={{ animationDelay: `${index * 100}ms` }}
                   >
@@ -267,10 +273,25 @@ const Landing = () => {
               </div>
             </div>
 
+            {/* Right Column: Dashboard Mockup */}
             <div className={`relative transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-              <div className="absolute -inset-8 bg-gradient-to-r from-primary/20 to-secondary/20 rounded-3xl blur-3xl animate-pulse" />
-              <div className="relative bg-card border border-border/50 rounded-2xl p-6 shadow-2xl hover:shadow-primary/10 transition-all duration-500">
-                <div className="flex items-center gap-2 mb-6">
+              <div className="absolute -inset-8 bg-gradient-to-r from-primary/20 to-secondary/20 rounded-3xl blur-3xl animate-pulse" /> {/* */}
+
+              {/* ===> IMAGEM DO EMPRESÁRIO ADICIONADA AQUI <=== */}
+              <img
+                // src="/path/to/your/empresario-sorrindo.png" // <-- SUBSTITUA PELO CAMINHO DA SUA IMAGEM QUANDO TIVER
+                src="https://via.placeholder.com/300x400?text=Empresario" // <-- Placeholder temporário
+                alt="Empresário sorrindo com o dashboard do MonitorPro"
+                className="absolute -top-10 right-0 w-64 h-auto object-contain z-20 
+                           lg:w-72 lg:-right-16 lg:-top-16 
+                           transform transition-transform duration-300 hover:scale-105"
+                // Ajuste '-top-xx', '-right-xx' e 'w-xx' conforme necessário
+              />
+              {/* ===> FIM DA IMAGEM DO EMPRESÁRIO <=== */}
+
+              <div className="relative z-10 bg-card border border-border/50 rounded-2xl p-6 shadow-2xl hover:shadow-primary/10 transition-all duration-500"> {/* Adicionado z-10 */}
+                {/* ... (código do card do dashboard permanece o mesmo) ... */}
+                 <div className="flex items-center gap-2 mb-6">
                   <div className="flex gap-1">
                     <div className="w-3 h-3 rounded-full bg-red-500 animate-pulse" />
                     <div className="w-3 h-3 rounded-full bg-yellow-500 animate-pulse delay-75" />
@@ -281,7 +302,7 @@ const Landing = () => {
                     Monitoramento Ativo
                   </div>
                 </div>
-                
+
                 <div className="space-y-4">
                   <div className="grid grid-cols-3 gap-4">
                     <div className="bg-gradient-to-br from-primary/20 to-primary/5 rounded-lg p-3 text-center border border-primary/20 hover:scale-105 transition-transform">
@@ -297,12 +318,12 @@ const Landing = () => {
                       <div className="text-xs text-muted-foreground">Sites/hora</div>
                     </div>
                   </div>
-                  
+
                   <div className="bg-gradient-to-br from-muted to-muted/50 rounded-lg h-32 flex items-center justify-center relative overflow-hidden group">
                     <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-secondary/5 to-primary/5 animate-gradient bg-[length:200%_auto]" />
                     <BarChart3 className="w-8 h-8 text-primary group-hover:scale-110 transition-transform relative z-10" />
                   </div>
-                  
+
                   <div className="space-y-2">
                     <div className="flex justify-between text-sm">
                       <span className="text-muted-foreground flex items-center gap-2">
@@ -316,9 +337,9 @@ const Landing = () => {
                         { site: "facebook.com", status: "Bloqueado", color: "red" },
                         { site: "youtube.com", status: "Alerta", color: "amber" },
                         { site: "linkedin.com", status: "Permitido", color: "green" }
-                      ].map((item, index) => (
-                        <div 
-                          key={item.site} 
+                      ].map((item, index) => ( //
+                        <div
+                          key={item.site}
                           className="flex justify-between text-xs p-2 rounded bg-muted/50 hover:bg-muted transition-colors"
                           style={{ animationDelay: `${index * 100}ms` }}
                         >
@@ -340,9 +361,11 @@ const Landing = () => {
         </div>
       </section>
 
+      {/* Features Section */}
       <section id="recursos" className="py-32 bg-muted/30 relative">
-        <div className="absolute inset-0 bg-gradient-to-b from-background via-transparent to-background pointer-events-none" />
-        
+        {/* ... (código da seção de recursos permanece o mesmo) ... */}
+         <div className="absolute inset-0 bg-gradient-to-b from-background via-transparent to-background pointer-events-none" />
+
         <div className="container mx-auto px-6 relative z-10">
           <div className="text-center mb-20">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-medium mb-6">
@@ -356,14 +379,14 @@ const Landing = () => {
               Controle completo sobre acessos web com tecnologia avançada para detectar sites indevidos e garantir produtividade
             </p>
           </div>
-          
+
           <div className="space-y-32 max-w-7xl mx-auto">
-            {features.map((feature, index) => {
+            {features.map((feature, index) => { //
               const isEven = index % 2 === 0;
               const FeatureIcon = feature.icon;
-              
+
               return (
-                <div 
+                <div
                   key={feature.title}
                   className={`grid lg:grid-cols-2 gap-12 items-center`}
                 >
@@ -373,7 +396,7 @@ const Landing = () => {
                         <FeatureIcon className="w-8 h-8 text-white relative z-10" />
                         <div className={`absolute inset-0 bg-gradient-to-br ${feature.gradient} rounded-2xl blur opacity-50 group-hover:opacity-75 transition-opacity`} />
                       </div>
-                      
+
                       <div>
                         <h3 className="text-4xl font-bold mb-4 bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent">
                           {feature.title}
@@ -385,8 +408,8 @@ const Landing = () => {
                     </div>
 
                     <div className="space-y-3">
-                      {feature.details.map((detail, idx) => (
-                        <div 
+                      {feature.details.map((detail, idx) => ( //
+                        <div
                           key={idx}
                           className="flex items-start gap-3 group"
                           style={{ animationDelay: `${idx * 100}ms` }}
@@ -435,7 +458,7 @@ const Landing = () => {
                         {index === 0 && (
                           <div className="space-y-4">
                             <div className="grid grid-cols-3 gap-3">
-                              {["Sites Visitados", "URLs Únicas", "Tempo Online"].map((label, i) => (
+                              {["Sites Visitados", "URLs Únicas", "Tempo Online"].map((label, i) => ( //
                                 <div key={i} className={`h-24 bg-gradient-to-br ${feature.bgGradient} rounded-xl border border-border/50 flex flex-col items-center justify-center`}>
                                   <Eye className="w-6 h-6 text-primary animate-pulse mb-2" style={{ animationDelay: `${i * 200}ms` }} />
                                   <div className="text-xs text-muted-foreground text-center px-1">{label}</div>
@@ -457,8 +480,8 @@ const Landing = () => {
                               { label: "Redes Sociais Bloqueadas", severity: "high", time: "Agora" },
                               { label: "Site de Jogos Detectado", severity: "medium", time: "2 min atrás" },
                               { label: "Conteúdo Impróprio", severity: "high", time: "5 min atrás" }
-                            ].map((alert, i) => (
-                              <div 
+                            ].map((alert, i) => ( //
+                              <div
                                 key={i}
                                 className="flex items-center gap-3 p-4 bg-muted/50 rounded-xl border border-border/50 hover:bg-muted transition-colors"
                                 style={{ animationDelay: `${i * 150}ms` }}
@@ -480,7 +503,7 @@ const Landing = () => {
                               {[
                                 { label: "Sites Produtivos", value: "67%", color: "green" },
                                 { label: "Sites Bloqueados", value: "12%", color: "red" }
-                              ].map((metric, i) => (
+                              ].map((metric, i) => ( //
                                 <div key={i} className="p-4 bg-gradient-to-br from-muted to-muted/50 rounded-xl border border-border/50">
                                   <div className={`text-2xl font-bold text-${metric.color}-500`}>{metric.value}</div>
                                   <div className="text-xs text-muted-foreground">{metric.label}</div>
@@ -500,8 +523,8 @@ const Landing = () => {
                               { name: "Marketing", sites: 234 },
                               { name: "Desenvolvimento", sites: 189 },
                               { name: "Administrativo", sites: 156 }
-                            ].map((teamData, i) => (
-                              <div 
+                            ].map((teamData, i) => ( //
+                              <div
                                 key={i}
                                 className="flex items-center gap-3 p-4 bg-muted/50 rounded-xl border border-border/50 hover:bg-muted transition-colors"
                                 style={{ animationDelay: `${i * 150}ms` }}
@@ -520,8 +543,8 @@ const Landing = () => {
                         {index === 4 && (
                           <div className="space-y-4">
                             <div className="grid grid-cols-2 gap-3">
-                              {["PDF", "Excel", "CSV", "JSON"].map((format, i) => (
-                                <div 
+                              {["PDF", "Excel", "CSV", "JSON"].map((format, i) => ( //
+                                <div
                                   key={i}
                                   className="p-3 bg-gradient-to-br from-muted to-muted/50 rounded-xl border border-border/50 text-center hover:scale-105 transition-transform cursor-pointer"
                                 >
@@ -565,9 +588,11 @@ const Landing = () => {
         </div>
       </section>
 
+      {/* How It Works Section */}
       <section className="py-32 bg-background relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-muted/30 via-transparent to-muted/30" />
-        
+         {/* ... (código da seção 'Como Funciona' permanece o mesmo) ... */}
+         <div className="absolute inset-0 bg-gradient-to-b from-muted/30 via-transparent to-muted/30" />
+
         <div className="container mx-auto px-6 relative z-10">
           <div className="text-center mb-16">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-medium mb-6">
@@ -602,7 +627,7 @@ const Landing = () => {
                 description: "Notificações em tempo real quando detecta acesso a sites bloqueados",
                 gradient: "from-red-500 to-orange-500"
               }
-            ].map((tech, index) => (
+            ].map((tech, index) => ( //
               <div
                 key={tech.title}
                 className="relative group"
@@ -622,37 +647,39 @@ const Landing = () => {
         </div>
       </section>
 
+      {/* Call to Action Section */}
       <section className="py-32 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-primary to-secondary" />
+         {/* ... (código da seção CTA permanece o mesmo) ... */}
+         <div className="absolute inset-0 bg-gradient-to-r from-primary to-secondary" />
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#fff2_1px,transparent_1px),linear-gradient(to_bottom,#fff2_1px,transparent_1px)] bg-[size:4rem_4rem]" />
-        
+
         <div className="container mx-auto px-6 text-center relative z-10">
           <div className="max-w-4xl mx-auto space-y-8">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/20 text-white text-sm font-medium mb-4">
               <Sparkles className="w-4 h-4" />
               Comece Hoje Mesmo
             </div>
-            
+
             <h2 className="text-5xl lg:text-6xl font-bold text-white leading-tight">
               Pronto para Monitorar<br />Acessos Web com Inteligência?
             </h2>
-            
+
             <p className="text-xl text-white/90 max-w-2xl mx-auto leading-relaxed">
               Junte-se a centenas de empresas e escolas que já protegem sua produtividade monitorando sites indevidos
             </p>
-            
+
             <div className="flex flex-col sm:flex-row gap-4 justify-center pt-8">
-              <Button 
+              <Button
                 onClick={() => navigate("/dashboard")}
-                className="bg-white text-primary hover:bg-white/90 rounded-xl px-8 py-6 text-lg shadow-2xl hover:shadow-white/20 hover:scale-105 transition-all duration-300 group"
+                className="bg-white text-primary hover:bg-white/90 rounded-xl px-8 py-6 text-lg shadow-2xl hover:shadow-white/20 hover:scale-105 transition-all duration-300 group" //
                 size="lg"
               >
                 <Zap className="w-5 h-5 mr-2 group-hover:rotate-12 transition-transform" />
                 Começar Monitoramento
               </Button>
-              <Button 
+              <Button
                 variant="outline"
-                className="border-2 border-white text-white hover:bg-white/10 rounded-xl px-8 py-6 text-lg hover:scale-105 transition-all duration-300"
+                className="border-2 border-white text-white hover:bg-white/10 rounded-xl px-8 py-6 text-lg hover:scale-105 transition-all duration-300" //
                 size="lg"
               >
                 <FileText className="w-5 h-5 mr-2" />
@@ -666,8 +693,8 @@ const Landing = () => {
                 { number: "50k+", label: "Usuários Rastreados" },
                 { number: "99.9%", label: "Taxa de Detecção" },
                 { number: "24/7", label: "Monitoramento Ativo" }
-              ].map((stat, index) => (
-                <div 
+              ].map((stat, index) => ( //
+                <div
                   key={stat.label}
                   className="text-center"
                   style={{ animationDelay: `${index * 100}ms` }}
@@ -681,15 +708,17 @@ const Landing = () => {
         </div>
       </section>
 
+      {/* Footer */}
       <footer className="bg-card border-t border-border py-20">
-        <div className="container mx-auto px-6">
+        {/* ... (código do footer permanece o mesmo) ... */}
+         <div className="container mx-auto px-6">
           <div className="grid md:grid-cols-4 gap-12 mb-12">
             <div className="md:col-span-2">
               <div className="flex items-center gap-3 mb-6">
-                <img 
-                  src="https://i.ibb.co/gF7msvyr/LOGO-PERFIL-1.png" 
-                  alt="MonitorPro Logo" 
-                  className="w-12 h-12 rounded-xl shadow-lg"
+                <img
+                  src="https://i.ibb.co/gF7msvyr/LOGO-PERFIL-1.png" //
+                  alt="MonitorPro Logo"
+                  className="w-12 h-12 rounded-xl shadow-lg" //
                 />
                 <div>
                   <span className="font-bold text-xl bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
@@ -699,21 +728,21 @@ const Landing = () => {
                 </div>
               </div>
               <p className="text-muted-foreground leading-relaxed max-w-md mb-6">
-                Solução completa de monitoramento de acessos web para empresas e instituições de ensino. 
+                Solução completa de monitoramento de acessos web para empresas e instituições de ensino.
                 Detecte sites indevidos e garanta produtividade 24/7.
               </p>
               <div className="flex gap-4">
-                {[Globe, Shield, Lock].map((Icon, index) => (
-                  <div 
+                {[Globe, Shield, Lock].map((Icon, index) => ( //
+                  <div
                     key={index}
-                    className="w-10 h-10 bg-muted hover:bg-primary/10 rounded-lg flex items-center justify-center cursor-pointer transition-all duration-300 hover:scale-110 group"
+                    className="w-10 h-10 bg-muted hover:bg-primary/10 rounded-lg flex items-center justify-center cursor-pointer transition-all duration-300 hover:scale-110 group" //
                   >
                     <Icon className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
                   </div>
                 ))}
               </div>
             </div>
-            
+
             {[
               {
                 title: "Produto",
@@ -727,15 +756,15 @@ const Landing = () => {
                 title: "Legal",
                 links: ["Privacidade", "LGPD", "Termos", "Cookies", "Compliance"]
               }
-            ].map((section) => (
+            ].map((section) => ( //
               <div key={section.title}>
                 <h4 className="font-semibold mb-6 text-lg">{section.title}</h4>
                 <ul className="space-y-3">
-                  {section.links.map((link) => (
+                  {section.links.map((link) => ( //
                     <li key={link}>
-                      <a 
-                        href="#" 
-                        className="text-muted-foreground hover:text-primary transition-colors flex items-center gap-2 group"
+                      <a
+                        href="#"
+                        className="text-muted-foreground hover:text-primary transition-colors flex items-center gap-2 group" //
                       >
                         <ArrowRight className="w-3 h-3 opacity-0 group-hover:opacity-100 -ml-5 group-hover:ml-0 transition-all" />
                         {link}
@@ -746,7 +775,7 @@ const Landing = () => {
               </div>
             ))}
           </div>
-          
+
           <div className="pt-8 border-t border-border">
             <div className="flex flex-col md:flex-row items-center justify-between gap-4">
               <span className="text-sm text-muted-foreground">
@@ -766,7 +795,7 @@ const Landing = () => {
       </footer>
 
       <CookieBanner />
-      
+
       <style>{`
         @keyframes gradient {
           0%, 100% { background-position: 0% 50%; }
