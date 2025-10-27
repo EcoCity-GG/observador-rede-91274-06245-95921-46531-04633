@@ -141,21 +141,6 @@ const Landing = () => {
       gradient: "from-red-500 to-rose-500",
       bgGradient: "from-red-500/10 to-rose-500/10"
     },
-    {
-      icon: Shield,
-      title: "Conformidade LGPD",
-      description: "Monitoramento totalmente adequado à legislação de proteção de dados",
-      details: [
-        "Criptografia de dados de navegação",
-        "Consentimento informado dos usuários",
-        "Logs de auditoria para compliance",
-        "Relatórios para fiscalização"
-      ],
-      metric: "100%",
-      metricLabel: "Compliance LGPD",
-      gradient: "from-indigo-500 to-blue-500",
-      bgGradient: "from-indigo-500/10 to-blue-500/10"
-    }
   ];
 
   return (
