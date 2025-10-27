@@ -140,7 +140,7 @@ const Landing = () => {
       metricLabel: "Templates de relatório",
       gradient: "from-red-500 to-rose-500",
       bgGradient: "from-red-500/10 to-rose-500/10"
-    },
+    }
   ];
 
   return (
