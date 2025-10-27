@@ -239,7 +239,7 @@ const Landing = () => {
                 >
                   <div className="absolute inset-0 bg-gradient-to-r from-secondary to-primary opacity-0 group-hover:opacity-100 transition-opacity" />
                   <Activity className="w-5 h-5 mr-2 relative z-10 group-hover:scale-110 transition-transform" />
-                  <span className="relative z-10">Experimente Gratuitamente</span>
+                  <span className="relative z-10">Acessar a Demo</span>
                 </Button>
                 <Button 
                   variant="outline"
@@ -247,7 +247,7 @@ const Landing = () => {
                   size="lg"
                 >
                   <FileText className="w-5 h-5 mr-2 group-hover:rotate-12 transition-transform" />
-                  Ver Demonstração
+                  Ver Planos
                 </Button>
               </div>
 
@@ -622,73 +622,6 @@ const Landing = () => {
         </div>
       </section>
 
-      <section className="py-32 bg-muted/30 relative">
-        <div className="absolute inset-0 bg-gradient-to-b from-background via-transparent to-background" />
-        
-        <div className="container mx-auto px-6 relative z-10">
-          <div className="text-center mb-20">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-medium mb-6">
-              <Zap className="w-4 h-4" />
-              Implementação Rápida
-            </div>
-            <h2 className="text-5xl font-bold mb-6">Como Começar</h2>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Configure o monitoramento de acessos em apenas 3 passos simples
-            </p>
-          </div>
-          
-          <div className="grid md:grid-cols-3 gap-12 max-w-6xl mx-auto">
-            {[
-              { 
-                step: "01", 
-                title: "Instale a Extensão", 
-                description: "Adicione nossa extensão nos navegadores dos usuários que deseja monitorar",
-                icon: Globe,
-                gradient: "from-blue-500 to-cyan-500"
-              },
-              { 
-                step: "02", 
-                title: "Configure Políticas", 
-                description: "Defina quais categorias de sites devem gerar alertas (redes sociais, jogos, etc)",
-                icon: Shield,
-                gradient: "from-purple-500 to-pink-500"
-              },
-              { 
-                step: "03", 
-                title: "Monitore em Tempo Real", 
-                description: "Acompanhe todos os acessos web e receba alertas instantâneos via dashboard",
-                icon: Activity,
-                gradient: "from-green-500 to-emerald-500"
-              }
-            ].map((item, index) => (
-              <div key={item.step} className="text-center group relative">
-                {index < 2 && (
-                  <div className="absolute top-10 left-1/2 w-full h-0.5 bg-gradient-to-r from-primary to-secondary hidden md:block z-0" />
-                )}
-                
-                <div className="relative z-10">
-                  <div className={`w-20 h-20 bg-gradient-to-br ${item.gradient} rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 shadow-lg relative`}>
-                    <item.icon className="w-10 h-10 text-white relative z-10" />
-                    <div className={`absolute inset-0 bg-gradient-to-br ${item.gradient} rounded-2xl blur opacity-50 group-hover:opacity-75 transition-opacity`} />
-                  </div>
-                  
-                  <div className={`inline-flex items-center justify-center px-4 py-2 rounded-full bg-gradient-to-r ${item.gradient} text-white font-bold mb-4 text-sm`}>
-                    PASSO {item.step}
-                  </div>
-                  
-                  <h3 className="text-2xl font-bold mb-4 group-hover:text-primary transition-colors">
-                    {item.title}
-                  </h3>
-                  <p className="text-muted-foreground leading-relaxed">
-                    {item.description}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       <section className="py-32 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-primary to-secondary" />
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#fff2_1px,transparent_1px),linear-gradient(to_bottom,#fff2_1px,transparent_1px)] bg-[size:4rem_4rem]" />
@@ -723,7 +656,7 @@ const Landing = () => {
                 size="lg"
               >
                 <FileText className="w-5 h-5 mr-2" />
-                Ver Demo ao Vivo
+                Ver Planos
               </Button>
             </div>
 
