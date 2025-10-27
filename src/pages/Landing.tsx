@@ -43,7 +43,6 @@ const Landing = () => {
   useEffect(() => {
     setIsVisible(true);
     
-    // VLibras integration
     const script = document.createElement("script");
     script.src = "https://vlibras.gov.br/app/vlibras-plugin.js";
     script.async = true;
@@ -54,7 +53,6 @@ const Landing = () => {
       new window.VLibras.Widget("https://vlibras.gov.br/app");
     };
 
-    // Auto-rotate features
     const interval = setInterval(() => {
       setActiveFeature((prev) => (prev + 1) % 6);
     }, 5000);
@@ -162,7 +160,6 @@ const Landing = () => {
 
   return (
     <div className="min-h-screen bg-background overflow-hidden">
-      {/* VLibras accessibility */}
       <div data-vw="true" className="enabled">
         <div data-vw-access-button="true" className="active"></div>
         <div data-vw-plugin-wrapper="true">
@@ -170,21 +167,16 @@ const Landing = () => {
         </div>
       </div>
 
-      {/* Animated Background */}
       <div className="fixed inset-0 -z-10">
         <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-primary/5" />
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl animate-pulse" />
         <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-secondary/10 rounded-full blur-3xl animate-pulse delay-1000" />
-        
-        {/* Grid Pattern */}
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#8882_1px,transparent_1px),linear-gradient(to_bottom,#8882_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,#000_70%,transparent_110%)]" />
       </div>
 
-      {/* Navbar */}
       <nav className="bg-background/80 backdrop-blur-xl border-b border-border/50 sticky top-0 z-50">
         <div className="container mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
-            {/* Logo */}
             <div className="flex items-center gap-12">
               <div className="flex items-center gap-3 group cursor-pointer" onClick={() => navigate("/")}>
                 <div className="relative w-12 h-12 bg-gradient-to-br from-primary to-secondary rounded-xl flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300">
@@ -199,7 +191,6 @@ const Landing = () => {
                 </div>
               </div>
               
-              {/* Navigation Links */}
               <div className="hidden lg:flex items-center gap-8">
                 {["Home", "Recursos", "Dashboard", "Preços", "Contato"].map((item) => (
                   <a
@@ -214,7 +205,6 @@ const Landing = () => {
               </div>
             </div>
 
-            {/* Right Side Actions */}
             <div className="flex items-center gap-4">
               <LanguageSelector />
               <ThemeToggle />
@@ -231,11 +221,9 @@ const Landing = () => {
         </div>
       </nav>
 
-      {/* Hero Section */}
       <section id="home" className="relative pt-20 pb-32">
         <div className="container mx-auto px-6">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
-            {/* Left Content */}
             <div className={`space-y-8 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
               <div className="space-y-4">
                 <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-medium animate-pulse">
@@ -277,7 +265,6 @@ const Landing = () => {
                 </Button>
               </div>
 
-              {/* Stats */}
               <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 pt-8">
                 {statsDisplay.map((stat, index) => (
                   <div 
@@ -294,7 +281,6 @@ const Landing = () => {
               </div>
             </div>
 
-            {/* Right Content - Dashboard Preview */}
             <div className={`relative transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
               <div className="absolute -inset-8 bg-gradient-to-r from-primary/20 to-secondary/20 rounded-3xl blur-3xl animate-pulse" />
               <div className="relative bg-card border border-border/50 rounded-2xl p-6 shadow-2xl hover:shadow-primary/10 transition-all duration-500">
@@ -310,7 +296,6 @@ const Landing = () => {
                   </div>
                 </div>
                 
-                {/* Mini dashboard preview */}
                 <div className="space-y-4">
                   <div className="grid grid-cols-3 gap-4">
                     <div className="bg-gradient-to-br from-primary/20 to-primary/5 rounded-lg p-3 text-center border border-primary/20 hover:scale-105 transition-transform">
@@ -369,7 +354,6 @@ const Landing = () => {
         </div>
       </section>
 
-      {/* Features Section - Enhanced Individual Cards */}
       <section id="recursos" className="py-32 bg-muted/30 relative">
         <div className="absolute inset-0 bg-gradient-to-b from-background via-transparent to-background pointer-events-none" />
         
@@ -395,9 +379,8 @@ const Landing = () => {
               return (
                 <div 
                   key={feature.title}
-                  className={`grid lg:grid-cols-2 gap-12 items-center ${!isEven ? 'lg:flex-row-reverse' : ''}`}
+                  className={`grid lg:grid-cols-2 gap-12 items-center`}
                 >
-                  {/* Content Side */}
                   <div className={`space-y-6 ${!isEven ? 'lg:order-2' : ''}`}>
                     <div className="space-y-4">
                       <div className={`inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br ${feature.gradient} shadow-lg relative group`}>
@@ -439,21 +422,18 @@ const Landing = () => {
                         </div>
                         <div className="text-sm text-muted-foreground">{feature.metricLabel}</div>
                       </div>
-                      <TrendingUp className={`w-6 h-6 text-green-500`} />
+                      <TrendingUp className="w-6 h-6 text-green-500" />
                     </div>
                   </div>
 
-                  {/* Visual Side */}
                   <div className={`relative ${!isEven ? 'lg:order-1' : ''}`}>
                     <div className={`absolute -inset-4 bg-gradient-to-br ${feature.gradient} opacity-20 rounded-3xl blur-2xl`} />
                     <div className="relative bg-card border border-border/50 rounded-3xl p-8 shadow-2xl hover:shadow-primary/10 transition-all duration-500 overflow-hidden group">
-                      {/* Animated background pattern */}
                       <div className="absolute inset-0 opacity-5">
                         <div className="absolute inset-0 bg-[linear-gradient(to_right,#8882_1px,transparent_1px),linear-gradient(to_bottom,#8882_1px,transparent_1px)] bg-[size:2rem_2rem]" />
                       </div>
 
                       <div className="relative z-10 space-y-6">
-                        {/* Header */}
                         <div className="flex items-center justify-between">
                           <div className="flex items-center gap-3">
                             <div className={`w-3 h-3 rounded-full bg-gradient-to-r ${feature.gradient} animate-pulse`} />
@@ -466,7 +446,6 @@ const Landing = () => {
                           </div>
                         </div>
 
-                        {/* Visual representation based on feature */}
                         {index === 0 && (
                           <div className="space-y-4">
                             <div className="grid grid-cols-3 gap-3">
@@ -497,10 +476,53 @@ const Landing = () => {
                                 className="flex items-center gap-3 p-4 bg-muted/50 rounded-xl border border-border/50 hover:bg-muted transition-colors"
                                 style={{ animationDelay: `${i * 150}ms` }}
                               >
+                                <AlertTriangle className={`w-5 h-5 ${alert.severity === 'high' ? 'text-red-500' : alert.severity === 'medium' ? 'text-amber-500' : 'text-blue-500'} animate-pulse`} />
+                                <div className="flex-1">
+                                  <div className="font-medium text-sm">{alert.label}</div>
+                                  <div className="text-xs text-muted-foreground">{alert.time}</div>
+                                </div>
+                                <ArrowRight className="w-4 h-4 text-muted-foreground" />
+                              </div>
+                            ))}
+                          </div>
+                        )}
+
+                        {index === 2 && (
+                          <div className="space-y-4">
+                            <div className="grid grid-cols-2 gap-3">
+                              {[
+                                { label: "Produtividade", value: "87%", color: "green" },
+                                { label: "Compliance", value: "95%", color: "blue" }
+                              ].map((metric, i) => (
+                                <div key={i} className="p-4 bg-gradient-to-br from-muted to-muted/50 rounded-xl border border-border/50">
+                                  <div className={`text-2xl font-bold text-${metric.color}-500`}>{metric.value}</div>
+                                  <div className="text-xs text-muted-foreground">{metric.label}</div>
+                                </div>
+                              ))}
+                            </div>
+                            <div className="h-40 bg-gradient-to-br from-muted to-muted/50 rounded-xl border border-border/50 flex items-center justify-center relative overflow-hidden">
+                              <BarChart3 className="w-12 h-12 text-primary/50" />
+                              <div className="absolute inset-0 bg-gradient-to-t from-primary/10 to-transparent" />
+                            </div>
+                          </div>
+                        )}
+
+                        {index === 3 && (
+                          <div className="space-y-3">
+                            {[
+                              { name: "Equipe Marketing", users: 24 },
+                              { name: "Desenvolvimento", users: 18 },
+                              { name: "Administrativo", users: 12 }
+                            ].map((teamData, i) => (
+                              <div 
+                                key={i}
+                                className="flex items-center gap-3 p-4 bg-muted/50 rounded-xl border border-border/50 hover:bg-muted transition-colors"
+                                style={{ animationDelay: `${i * 150}ms` }}
+                              >
                                 <Users className="w-5 h-5 text-primary" />
                                 <div className="flex-1">
-                                  <div className="font-medium text-sm">{team.name}</div>
-                                  <div className="text-xs text-muted-foreground">{team.users} usuários</div>
+                                  <div className="font-medium text-sm">{teamData.name}</div>
+                                  <div className="text-xs text-muted-foreground">{teamData.users} usuários</div>
                                 </div>
                                 <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
                               </div>
@@ -565,7 +587,6 @@ const Landing = () => {
                           </div>
                         )}
 
-                        {/* Footer metrics */}
                         <div className="pt-4 border-t border-border/50 flex items-center justify-between">
                           <div className="flex items-center gap-2">
                             <div className={`w-8 h-8 rounded-lg bg-gradient-to-br ${feature.gradient} flex items-center justify-center`}>
@@ -587,7 +608,6 @@ const Landing = () => {
         </div>
       </section>
 
-      {/* Technology Stack Section */}
       <section className="py-32 bg-background relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-muted/30 via-transparent to-muted/30" />
         
@@ -645,7 +665,6 @@ const Landing = () => {
         </div>
       </section>
 
-      {/* How It Works */}
       <section className="py-32 bg-muted/30 relative">
         <div className="absolute inset-0 bg-gradient-to-b from-background via-transparent to-background" />
         
@@ -686,7 +705,6 @@ const Landing = () => {
               }
             ].map((item, index) => (
               <div key={item.step} className="text-center group relative">
-                {/* Connection line */}
                 {index < 2 && (
                   <div className="absolute top-10 left-1/2 w-full h-0.5 bg-gradient-to-r from-primary to-secondary hidden md:block z-0" />
                 )}
@@ -714,7 +732,6 @@ const Landing = () => {
         </div>
       </section>
 
-      {/* CTA Section */}
       <section className="py-32 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-primary to-secondary" />
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#fff2_1px,transparent_1px),linear-gradient(to_bottom,#fff2_1px,transparent_1px)] bg-[size:4rem_4rem]" />
@@ -774,7 +791,6 @@ const Landing = () => {
         </div>
       </section>
 
-      {/* Footer */}
       <footer className="bg-card border-t border-border py-20">
         <div className="container mx-auto px-6">
           <div className="grid md:grid-cols-4 gap-12 mb-12">
@@ -885,4 +901,4 @@ const Landing = () => {
   );
 };
 
-export default Landing; 
+export default Landing;
