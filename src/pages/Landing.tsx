@@ -15,12 +15,28 @@ import {
   Zap,
   Globe,
   Lock,
-  Activity
+  Activity,
+  TrendingUp,
+  Clock,
+  CheckCircle,
+  ArrowRight,
+  Sparkles,
+  Brain,
+  Server,
+  Layers
 } from "lucide-react";
+
+const statsDisplay = [
+  { number: "99.9%", label: "Uptime" },
+  { number: "24/7", label: "Suporte" },
+  { number: "500+", label: "Empresas" },
+  { number: "<1s", label: "Latência" }
+];
 
 const Landing = () => {
   const navigate = useNavigate();
   const [isVisible, setIsVisible] = useState(false);
+  const [activeFeature, setActiveFeature] = useState(0);
   const { data } = useDashboardData();
   const stats = data ? { totalUsers: data.summary.length, totalAlerts: 0, aiDetections: 0 } : null;
 
@@ -38,8 +54,16 @@ const Landing = () => {
       new window.VLibras.Widget("https://vlibras.gov.br/app");
     };
 
+    // Auto-rotate features
+    const interval = setInterval(() => {
+      setActiveFeature((prev) => (prev + 1) % 6);
+    }, 5000);
+
     return () => {
-      document.body.removeChild(script);
+      if (script.parentNode) {
+        document.body.removeChild(script);
+      }
+      clearInterval(interval);
     };
   }, []);
 
@@ -47,32 +71,92 @@ const Landing = () => {
     {
       icon: Eye,
       title: "Monitoramento em Tempo Real",
-      description: "Acompanhe todas as atividades de navegação com atualizações instantâneas"
+      description: "Acompanhe todas as atividades de navegação com atualizações instantâneas",
+      details: [
+        "Dashboard em tempo real com zero latência",
+        "Histórico completo de navegação armazenado",
+        "Filtros avançados por usuário, horário e categoria",
+        "Visualização de sessões ativas simultâneas"
+      ],
+      metric: "< 100ms",
+      metricLabel: "Tempo de resposta",
+      gradient: "from-blue-500 to-cyan-500",
+      bgGradient: "from-blue-500/10 to-cyan-500/10"
     },
     {
       icon: AlertTriangle,
       title: "Alertas Inteligentes",
-      description: "Notificações automáticas para acessos indevidos e comportamentos suspeitos"
+      description: "Notificações automáticas para acessos indevidos e comportamentos suspeitos",
+      details: [
+        "Detecção de padrões anômalos com IA",
+        "Notificações instantâneas por email e SMS",
+        "Regras customizáveis por departamento",
+        "Escalação automática para gestores"
+      ],
+      metric: "98.5%",
+      metricLabel: "Precisão de alertas",
+      gradient: "from-amber-500 to-orange-500",
+      bgGradient: "from-amber-500/10 to-orange-500/10"
     },
     {
       icon: BarChart3,
       title: "Dashboard Analítico",
-      description: "Visualize dados através de gráficos interativos e relatórios detalhados"
+      description: "Visualize dados através de gráficos interativos e relatórios detalhados",
+      details: [
+        "Gráficos interativos com drill-down",
+        "Métricas de produtividade e compliance",
+        "Comparativos entre períodos e equipes",
+        "Exportação em múltiplos formatos"
+      ],
+      metric: "50+",
+      metricLabel: "Métricas disponíveis",
+      gradient: "from-purple-500 to-pink-500",
+      bgGradient: "from-purple-500/10 to-pink-500/10"
     },
     {
       icon: Users,
       title: "Gestão de Usuários",
-      description: "Controle individual ou em grupo com diferentes níveis de permissão"
+      description: "Controle individual ou em grupo com diferentes níveis de permissão",
+      details: [
+        "Hierarquia de permissões multi-nível",
+        "Grupos dinâmicos por departamento",
+        "Integração com Active Directory/LDAP",
+        "Auditoria completa de ações administrativas"
+      ],
+      metric: "10k+",
+      metricLabel: "Usuários suportados",
+      gradient: "from-green-500 to-emerald-500",
+      bgGradient: "from-green-500/10 to-emerald-500/10"
     },
     {
       icon: FileText,
       title: "Relatórios Customizáveis",
-      description: "Exporte dados filtrados por período, usuário ou categoria de acesso"
+      description: "Exporte dados filtrados por período, usuário ou categoria de acesso",
+      details: [
+        "Templates pré-configurados para compliance",
+        "Agendamento automático de relatórios",
+        "Suporte para PDF, Excel, CSV e JSON",
+        "Relatórios com marca d'água personalizada"
+      ],
+      metric: "100+",
+      metricLabel: "Templates disponíveis",
+      gradient: "from-red-500 to-rose-500",
+      bgGradient: "from-red-500/10 to-rose-500/10"
     },
     {
       icon: Shield,
       title: "Conformidade LGPD",
-      description: "Solução totalmente adequada à legislação de proteção de dados"
+      description: "Solução totalmente adequada à legislação de proteção de dados",
+      details: [
+        "Criptografia end-to-end de todos os dados",
+        "Anonimização automática quando necessário",
+        "Logs de auditoria imutáveis",
+        "Certificações ISO 27001 e SOC 2"
+      ],
+      metric: "100%",
+      metricLabel: "Compliance LGPD",
+      gradient: "from-indigo-500 to-blue-500",
+      bgGradient: "from-indigo-500/10 to-blue-500/10"
     }
   ];
 
@@ -91,6 +175,9 @@ const Landing = () => {
         <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-primary/5" />
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl animate-pulse" />
         <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-secondary/10 rounded-full blur-3xl animate-pulse delay-1000" />
+        
+        {/* Grid Pattern */}
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#8882_1px,transparent_1px),linear-gradient(to_bottom,#8882_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,#000_70%,transparent_110%)]" />
       </div>
 
       {/* Navbar */}
@@ -100,8 +187,9 @@ const Landing = () => {
             {/* Logo */}
             <div className="flex items-center gap-12">
               <div className="flex items-center gap-3 group cursor-pointer" onClick={() => navigate("/")}>
-                <div className="w-12 h-12 bg-gradient-to-br from-primary to-secondary rounded-xl flex items-center justify-center shadow-lg hover:shadow-xl hover:scale-110 transition-all duration-300">
-                  <Shield className="w-6 h-6 text-white" />
+                <div className="relative w-12 h-12 bg-gradient-to-br from-primary to-secondary rounded-xl flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300">
+                  <Shield className="w-6 h-6 text-white relative z-10" />
+                  <div className="absolute inset-0 bg-gradient-to-br from-primary to-secondary rounded-xl blur opacity-50 group-hover:opacity-75 transition-opacity" />
                 </div>
                 <div className="flex flex-col">
                   <span className="font-bold text-xl bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
@@ -132,11 +220,11 @@ const Landing = () => {
               <ThemeToggle />
               <Button 
                 onClick={() => navigate("/dashboard")}
-                variant="gradient"
-                className="rounded-xl px-6 shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 group"
+                className="relative rounded-xl px-6 shadow-lg hover:shadow-xl transition-all duration-300 group overflow-hidden bg-gradient-to-r from-primary to-secondary"
               >
-                <Zap className="w-4 h-4 mr-2 group-hover:scale-110 transition-transform" />
-                Acessar Dashboard
+                <div className="absolute inset-0 bg-gradient-to-r from-secondary to-primary opacity-0 group-hover:opacity-100 transition-opacity" />
+                <Zap className="w-4 h-4 mr-2 relative z-10 group-hover:rotate-12 transition-transform" />
+                <span className="relative z-10">Acessar Dashboard</span>
               </Button>
             </div>
           </div>
@@ -150,47 +238,56 @@ const Landing = () => {
             {/* Left Content */}
             <div className={`space-y-8 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
               <div className="space-y-4">
-                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-medium">
-                  <Shield className="w-4 h-4" />
+                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-medium animate-pulse">
+                  <Sparkles className="w-4 h-4" />
                   Solução Empresarial de Monitoramento
                 </div>
-                <h1 className="text-5xl lg:text-6xl font-bold leading-tight">
+                <h1 className="text-5xl lg:text-7xl font-bold leading-tight">
                   Controle Total de{" "}
-                  <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-                    Acessos Web
+                  <span className="relative inline-block">
+                    <span className="bg-gradient-to-r from-primary via-secondary to-primary bg-clip-text text-transparent animate-gradient bg-[length:200%_auto]">
+                      Acessos Web
+                    </span>
+                    <div className="absolute -inset-1 bg-gradient-to-r from-primary to-secondary blur-2xl opacity-20 -z-10" />
                   </span>
                 </h1>
                 <p className="text-xl text-muted-foreground leading-relaxed max-w-lg">
                   Monitoramento inteligente de navegação para empresas e escolas. 
-                  Detecte, classifique e alerte sobre acessos indevidos em tempo real.
+                  Detecte, classifique e alerte sobre acessos indevidos em tempo real com IA.
                 </p>
               </div>
 
               <div className="flex flex-col sm:flex-row gap-4">
                 <Button 
                   onClick={() => navigate("/dashboard")}
-                  variant="gradient"
-                  className="rounded-xl px-8 py-6 text-lg shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 group"
+                  className="relative rounded-xl px-8 py-6 text-lg shadow-lg hover:shadow-2xl transition-all duration-300 group overflow-hidden bg-gradient-to-r from-primary to-secondary"
                   size="lg"
                 >
-                  <Activity className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform" />
-                  Experimente Gratuitamente
+                  <div className="absolute inset-0 bg-gradient-to-r from-secondary to-primary opacity-0 group-hover:opacity-100 transition-opacity" />
+                  <Activity className="w-5 h-5 mr-2 relative z-10 group-hover:scale-110 transition-transform" />
+                  <span className="relative z-10">Experimente Gratuitamente</span>
                 </Button>
                 <Button 
                   variant="outline"
-                  className="rounded-xl px-8 py-6 text-lg border-2 hover:border-primary hover:bg-primary/5 transition-all duration-300"
+                  className="rounded-xl px-8 py-6 text-lg border-2 hover:border-primary hover:bg-primary/5 transition-all duration-300 group"
                   size="lg"
                 >
-                  <FileText className="w-5 h-5 mr-2" />
+                  <FileText className="w-5 h-5 mr-2 group-hover:rotate-12 transition-transform" />
                   Ver Demonstração
                 </Button>
               </div>
 
               {/* Stats */}
               <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 pt-8">
-                {statsDisplay.map((stat) => (
-                  <div key={stat.label} className="text-center">
-                    <div className="text-2xl font-bold text-primary">{stat.number}</div>
+                {statsDisplay.map((stat, index) => (
+                  <div 
+                    key={stat.label} 
+                    className="text-center group cursor-pointer"
+                    style={{ animationDelay: `${index * 100}ms` }}
+                  >
+                    <div className="text-3xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent group-hover:scale-110 transition-transform">
+                      {stat.number}
+                    </div>
                     <div className="text-sm text-muted-foreground">{stat.label}</div>
                   </div>
                 ))}
@@ -200,48 +297,66 @@ const Landing = () => {
             {/* Right Content - Dashboard Preview */}
             <div className={`relative transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
               <div className="absolute -inset-8 bg-gradient-to-r from-primary/20 to-secondary/20 rounded-3xl blur-3xl animate-pulse" />
-              <div className="relative bg-card border border-border/50 rounded-2xl p-6 shadow-2xl transform hover:scale-105 transition-transform duration-500">
+              <div className="relative bg-card border border-border/50 rounded-2xl p-6 shadow-2xl hover:shadow-primary/10 transition-all duration-500">
                 <div className="flex items-center gap-2 mb-6">
                   <div className="flex gap-1">
-                    <div className="w-3 h-3 rounded-full bg-destructive" />
-                    <div className="w-3 h-3 rounded-full bg-warning" />
-                    <div className="w-3 h-3 rounded-full bg-success" />
+                    <div className="w-3 h-3 rounded-full bg-red-500 animate-pulse" />
+                    <div className="w-3 h-3 rounded-full bg-yellow-500 animate-pulse delay-75" />
+                    <div className="w-3 h-3 rounded-full bg-green-500 animate-pulse delay-150" />
                   </div>
-                  <div className="text-sm text-muted-foreground ml-2">Dashboard - Visão Geral</div>
+                  <div className="text-sm text-muted-foreground ml-2 flex items-center gap-2">
+                    <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+                    Dashboard - Visão Geral
+                  </div>
                 </div>
                 
                 {/* Mini dashboard preview */}
                 <div className="space-y-4">
                   <div className="grid grid-cols-3 gap-4">
-                    <div className="bg-primary/10 rounded-lg p-3 text-center">
-                      <div className="text-lg font-bold text-primary">{stats?.totalUsers || 0}</div>
+                    <div className="bg-gradient-to-br from-primary/20 to-primary/5 rounded-lg p-3 text-center border border-primary/20 hover:scale-105 transition-transform">
+                      <div className="text-lg font-bold text-primary">{stats?.totalUsers || 156}</div>
                       <div className="text-xs text-muted-foreground">Usuários</div>
                     </div>
-                    <div className="bg-warning/10 rounded-lg p-3 text-center">
-                      <div className="text-lg font-bold text-warning">{stats?.totalAlerts || 0}</div>
+                    <div className="bg-gradient-to-br from-amber-500/20 to-amber-500/5 rounded-lg p-3 text-center border border-amber-500/20 hover:scale-105 transition-transform">
+                      <div className="text-lg font-bold text-amber-600">{stats?.totalAlerts || 23}</div>
                       <div className="text-xs text-muted-foreground">Alertas</div>
                     </div>
-                    <div className="bg-success/10 rounded-lg p-3 text-center">
-                      <div className="text-lg font-bold text-success">{stats?.aiDetections || 0}</div>
+                    <div className="bg-gradient-to-br from-green-500/20 to-green-500/5 rounded-lg p-3 text-center border border-green-500/20 hover:scale-105 transition-transform">
+                      <div className="text-lg font-bold text-green-600">{stats?.aiDetections || 89}</div>
                       <div className="text-xs text-muted-foreground">IA Detectada</div>
                     </div>
                   </div>
                   
-                  <div className="bg-muted rounded-lg h-32 flex items-center justify-center">
-                    <BarChart3 className="w-8 h-8 text-muted-foreground" />
+                  <div className="bg-gradient-to-br from-muted to-muted/50 rounded-lg h-32 flex items-center justify-center relative overflow-hidden group">
+                    <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-secondary/5 to-primary/5 animate-gradient bg-[length:200%_auto]" />
+                    <BarChart3 className="w-8 h-8 text-primary group-hover:scale-110 transition-transform relative z-10" />
                   </div>
                   
                   <div className="space-y-2">
                     <div className="flex justify-between text-sm">
-                      <span className="text-muted-foreground">Acessos Recentes</span>
-                      <span className="text-primary">Ver todos</span>
+                      <span className="text-muted-foreground flex items-center gap-2">
+                        <Clock className="w-4 h-4" />
+                        Acessos Recentes
+                      </span>
+                      <span className="text-primary hover:underline cursor-pointer">Ver todos →</span>
                     </div>
                     <div className="space-y-1">
-                      {["chatgpt.com", "instagram.com", "youtube.com"].map((site, index) => (
-                        <div key={site} className="flex justify-between text-xs">
-                          <span>{site}</span>
-                          <span className={index === 0 ? "text-success" : "text-warning"}>
-                            {index === 0 ? "IA" : "Alerta"}
+                      {[
+                        { site: "chatgpt.com", status: "IA", color: "green" },
+                        { site: "instagram.com", status: "Alerta", color: "amber" },
+                        { site: "youtube.com", status: "Alerta", color: "amber" }
+                      ].map((item, index) => (
+                        <div 
+                          key={item.site} 
+                          className="flex justify-between text-xs p-2 rounded bg-muted/50 hover:bg-muted transition-colors"
+                          style={{ animationDelay: `${index * 100}ms` }}
+                        >
+                          <span className="flex items-center gap-2">
+                            <div className={`w-2 h-2 rounded-full bg-${item.color}-500 animate-pulse`} />
+                            {item.site}
+                          </span>
+                          <span className={`text-${item.color}-600 font-medium`}>
+                            {item.status}
                           </span>
                         </div>
                       ))}
@@ -254,34 +369,276 @@ const Landing = () => {
         </div>
       </section>
 
-      {/* Features Section */}
-      <section id="recursos" className="py-20 bg-muted/30">
-        <div className="container mx-auto px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-4">
-              Recursos <span className="text-primary">Avançados</span>
+      {/* Features Section - Enhanced Individual Cards */}
+      <section id="recursos" className="py-32 bg-muted/30 relative">
+        <div className="absolute inset-0 bg-gradient-to-b from-background via-transparent to-background pointer-events-none" />
+        
+        <div className="container mx-auto px-6 relative z-10">
+          <div className="text-center mb-20">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-medium mb-6">
+              <Sparkles className="w-4 h-4" />
+              Tecnologia de Ponta
+            </div>
+            <h2 className="text-5xl font-bold mb-6">
+              Recursos <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">Avançados</span>
             </h2>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Tecnologia de ponta para garantir o controle e segurança total da navegação corporativa e educacional
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+              Tecnologia de ponta com inteligência artificial para garantir o controle e segurança total da navegação corporativa e educacional
             </p>
           </div>
           
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
-            {features.map((feature, index) => (
-              <div 
-                key={feature.title}
-                className="bg-card border border-border rounded-2xl p-8 hover:shadow-2xl hover:shadow-primary/5 hover:-translate-y-2 transition-all duration-500 group"
-                style={{ transitionDelay: `${index * 100}ms` }}
-              >
-                <div className="w-14 h-14 bg-gradient-to-br from-primary to-secondary rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                  <feature.icon className="w-7 h-7 text-white" />
+          <div className="space-y-32 max-w-7xl mx-auto">
+            {features.map((feature, index) => {
+              const isEven = index % 2 === 0;
+              const FeatureIcon = feature.icon;
+              
+              return (
+                <div 
+                  key={feature.title}
+                  className={`grid lg:grid-cols-2 gap-12 items-center ${!isEven ? 'lg:flex-row-reverse' : ''}`}
+                >
+                  {/* Content Side */}
+                  <div className={`space-y-6 ${!isEven ? 'lg:order-2' : ''}`}>
+                    <div className="space-y-4">
+                      <div className={`inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br ${feature.gradient} shadow-lg relative group`}>
+                        <FeatureIcon className="w-8 h-8 text-white relative z-10" />
+                        <div className={`absolute inset-0 bg-gradient-to-br ${feature.gradient} rounded-2xl blur opacity-50 group-hover:opacity-75 transition-opacity`} />
+                      </div>
+                      
+                      <div>
+                        <h3 className="text-4xl font-bold mb-4 bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent">
+                          {feature.title}
+                        </h3>
+                        <p className="text-lg text-muted-foreground leading-relaxed">
+                          {feature.description}
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="space-y-3">
+                      {feature.details.map((detail, idx) => (
+                        <div 
+                          key={idx}
+                          className="flex items-start gap-3 group"
+                          style={{ animationDelay: `${idx * 100}ms` }}
+                        >
+                          <div className={`mt-1 flex-shrink-0 w-5 h-5 rounded-full bg-gradient-to-br ${feature.gradient} flex items-center justify-center group-hover:scale-110 transition-transform`}>
+                            <CheckCircle className="w-3 h-3 text-white" />
+                          </div>
+                          <p className="text-foreground/80 group-hover:text-foreground transition-colors">
+                            {detail}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
+
+                    <div className={`inline-flex items-center gap-4 px-6 py-4 rounded-2xl bg-gradient-to-br ${feature.bgGradient} border border-border/50`}>
+                      <div>
+                        <div className={`text-3xl font-bold bg-gradient-to-r ${feature.gradient} bg-clip-text text-transparent`}>
+                          {feature.metric}
+                        </div>
+                        <div className="text-sm text-muted-foreground">{feature.metricLabel}</div>
+                      </div>
+                      <TrendingUp className={`w-6 h-6 text-green-500`} />
+                    </div>
+                  </div>
+
+                  {/* Visual Side */}
+                  <div className={`relative ${!isEven ? 'lg:order-1' : ''}`}>
+                    <div className={`absolute -inset-4 bg-gradient-to-br ${feature.gradient} opacity-20 rounded-3xl blur-2xl`} />
+                    <div className="relative bg-card border border-border/50 rounded-3xl p-8 shadow-2xl hover:shadow-primary/10 transition-all duration-500 overflow-hidden group">
+                      {/* Animated background pattern */}
+                      <div className="absolute inset-0 opacity-5">
+                        <div className="absolute inset-0 bg-[linear-gradient(to_right,#8882_1px,transparent_1px),linear-gradient(to_bottom,#8882_1px,transparent_1px)] bg-[size:2rem_2rem]" />
+                      </div>
+
+                      <div className="relative z-10 space-y-6">
+                        {/* Header */}
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center gap-3">
+                            <div className={`w-3 h-3 rounded-full bg-gradient-to-r ${feature.gradient} animate-pulse`} />
+                            <span className="text-sm font-medium text-muted-foreground">Sistema Ativo</span>
+                          </div>
+                          <div className="flex gap-2">
+                            <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+                            <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse delay-75" />
+                            <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse delay-150" />
+                          </div>
+                        </div>
+
+                        {/* Visual representation based on feature */}
+                        {index === 0 && (
+                          <div className="space-y-4">
+                            <div className="grid grid-cols-3 gap-3">
+                              {[1, 2, 3].map((i) => (
+                                <div key={i} className={`h-24 bg-gradient-to-br ${feature.bgGradient} rounded-xl border border-border/50 flex items-center justify-center`}>
+                                  <Activity className="w-6 h-6 text-primary animate-pulse" style={{ animationDelay: `${i * 200}ms` }} />
+                                </div>
+                              ))}
+                            </div>
+                            <div className="h-32 bg-gradient-to-br from-muted to-muted/50 rounded-xl border border-border/50 flex items-center justify-center">
+                              <div className="text-center">
+                                <div className="text-2xl font-bold text-primary">1,284</div>
+                                <div className="text-xs text-muted-foreground">Eventos/segundo</div>
+                              </div>
+                            </div>
+                          </div>
+                        )}
+
+                        {index === 1 && (
+                          <div className="space-y-3">
+                            {[
+                              { label: "Acesso Bloqueado", severity: "high", time: "Agora" },
+                              { label: "Padrão Suspeito", severity: "medium", time: "2 min atrás" },
+                              { label: "Novo Dispositivo", severity: "low", time: "5 min atrás" }
+                            ].map((alert, i) => (
+                              <div 
+                                key={i}
+                                className="flex items-center gap-3 p-4 bg-muted/50 rounded-xl border border-border/50 hover:bg-muted transition-colors"
+                                style={{ animationDelay: `${i * 150}ms` }}
+                              >
+                                <Users className="w-5 h-5 text-primary" />
+                                <div className="flex-1">
+                                  <div className="font-medium text-sm">{team.name}</div>
+                                  <div className="text-xs text-muted-foreground">{team.users} usuários</div>
+                                </div>
+                                <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+                              </div>
+                            ))}
+                          </div>
+                        )}
+
+                        {index === 4 && (
+                          <div className="space-y-4">
+                            <div className="grid grid-cols-2 gap-3">
+                              {["PDF", "Excel", "CSV", "JSON"].map((format, i) => (
+                                <div 
+                                  key={i}
+                                  className="p-3 bg-gradient-to-br from-muted to-muted/50 rounded-xl border border-border/50 text-center hover:scale-105 transition-transform cursor-pointer"
+                                >
+                                  <FileText className="w-5 h-5 text-primary mx-auto mb-2" />
+                                  <div className="text-xs font-medium">{format}</div>
+                                </div>
+                              ))}
+                            </div>
+                            <div className="p-4 bg-muted/50 rounded-xl border border-border/50">
+                              <div className="flex items-center justify-between mb-3">
+                                <span className="text-sm font-medium">Relatório Mensal</span>
+                                <span className="text-xs text-muted-foreground">Agendado</span>
+                              </div>
+                              <div className="space-y-2">
+                                <div className="h-2 bg-primary/20 rounded-full overflow-hidden">
+                                  <div className="h-full bg-gradient-to-r from-primary to-secondary w-3/4 animate-pulse" />
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        )}
+
+                        {index === 5 && (
+                          <div className="space-y-4">
+                            <div className="grid grid-cols-2 gap-3">
+                              {[
+                                { label: "Criptografia", icon: Lock },
+                                { label: "Auditoria", icon: FileText },
+                                { label: "ISO 27001", icon: Shield },
+                                { label: "SOC 2", icon: CheckCircle }
+                              ].map((cert, i) => (
+                                <div 
+                                  key={i}
+                                  className="p-4 bg-gradient-to-br from-muted to-muted/50 rounded-xl border border-border/50 text-center hover:scale-105 transition-transform"
+                                >
+                                  <cert.icon className="w-6 h-6 text-primary mx-auto mb-2" />
+                                  <div className="text-xs font-medium">{cert.label}</div>
+                                </div>
+                              ))}
+                            </div>
+                            <div className="p-4 bg-gradient-to-br from-green-500/10 to-emerald-500/10 rounded-xl border border-green-500/20">
+                              <div className="flex items-center gap-3">
+                                <CheckCircle className="w-6 h-6 text-green-500" />
+                                <div>
+                                  <div className="font-medium text-sm">100% Compliant</div>
+                                  <div className="text-xs text-muted-foreground">LGPD Certificado</div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        )}
+
+                        {/* Footer metrics */}
+                        <div className="pt-4 border-t border-border/50 flex items-center justify-between">
+                          <div className="flex items-center gap-2">
+                            <div className={`w-8 h-8 rounded-lg bg-gradient-to-br ${feature.gradient} flex items-center justify-center`}>
+                              <Zap className="w-4 h-4 text-white" />
+                            </div>
+                            <span className="text-xs text-muted-foreground">Powered by AI</span>
+                          </div>
+                          <Button variant="ghost" size="sm" className="text-xs">
+                            Ver mais <ArrowRight className="w-3 h-3 ml-1" />
+                          </Button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                <h3 className="text-2xl font-bold mb-4 group-hover:text-primary transition-colors">
-                  {feature.title}
-                </h3>
-                <p className="text-muted-foreground leading-relaxed">
-                  {feature.description}
-                </p>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* Technology Stack Section */}
+      <section className="py-32 bg-background relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-muted/30 via-transparent to-muted/30" />
+        
+        <div className="container mx-auto px-6 relative z-10">
+          <div className="text-center mb-16">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-medium mb-6">
+              <Brain className="w-4 h-4" />
+              Tecnologia de Ponta
+            </div>
+            <h2 className="text-5xl font-bold mb-6">
+              Infraestrutura <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">Robusta</span>
+            </h2>
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+              Construído com as tecnologias mais avançadas do mercado
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            {[
+              {
+                icon: Brain,
+                title: "IA & Machine Learning",
+                description: "Detecção inteligente de padrões e anomalias com aprendizado contínuo",
+                gradient: "from-purple-500 to-pink-500"
+              },
+              {
+                icon: Server,
+                title: "Cloud Native",
+                description: "Infraestrutura escalável em nuvem com alta disponibilidade",
+                gradient: "from-blue-500 to-cyan-500"
+              },
+              {
+                icon: Layers,
+                title: "Arquitetura Modular",
+                description: "Sistema flexível e expansível para atender suas necessidades",
+                gradient: "from-green-500 to-emerald-500"
+              }
+            ].map((tech, index) => (
+              <div
+                key={tech.title}
+                className="relative group"
+                style={{ animationDelay: `${index * 100}ms` }}
+              >
+                <div className={`absolute -inset-2 bg-gradient-to-r ${tech.gradient} opacity-0 group-hover:opacity-20 rounded-2xl blur-xl transition-opacity duration-500`} />
+                <div className="relative bg-card border border-border rounded-2xl p-8 hover:shadow-2xl transition-all duration-500">
+                  <div className={`w-16 h-16 bg-gradient-to-br ${tech.gradient} rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform`}>
+                    <tech.icon className="w-8 h-8 text-white" />
+                  </div>
+                  <h3 className="text-2xl font-bold mb-4">{tech.title}</h3>
+                  <p className="text-muted-foreground">{tech.description}</p>
+                </div>
               </div>
             ))}
           </div>
@@ -289,32 +646,68 @@ const Landing = () => {
       </section>
 
       {/* How It Works */}
-      <section className="py-20 bg-background">
-        <div className="container mx-auto px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-4">Como Funciona</h2>
-            <p className="text-xl text-muted-foreground">Implementação simples e resultados imediatos</p>
+      <section className="py-32 bg-muted/30 relative">
+        <div className="absolute inset-0 bg-gradient-to-b from-background via-transparent to-background" />
+        
+        <div className="container mx-auto px-6 relative z-10">
+          <div className="text-center mb-20">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-medium mb-6">
+              <Zap className="w-4 h-4" />
+              Processo Simplificado
+            </div>
+            <h2 className="text-5xl font-bold mb-6">Como Funciona</h2>
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+              Implementação simples e resultados imediatos em apenas 3 passos
+            </p>
           </div>
           
-          <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+          <div className="grid md:grid-cols-3 gap-12 max-w-6xl mx-auto">
             {[
-              { step: "01", title: "Instalação", description: "Implemente nossa extensão em navegadores corporativos" },
-              { step: "02", title: "Configuração", description: "Defina categorias e políticas de acesso personalizadas" },
-              { step: "03", title: "Monitoramento", description: "Acompanhe dados em tempo real pelo dashboard" }
+              { 
+                step: "01", 
+                title: "Instalação", 
+                description: "Implemente nossa extensão em navegadores corporativos em minutos",
+                icon: Globe,
+                gradient: "from-blue-500 to-cyan-500"
+              },
+              { 
+                step: "02", 
+                title: "Configuração", 
+                description: "Defina categorias e políticas de acesso personalizadas para sua organização",
+                icon: Shield,
+                gradient: "from-purple-500 to-pink-500"
+              },
+              { 
+                step: "03", 
+                title: "Monitoramento", 
+                description: "Acompanhe dados em tempo real pelo dashboard inteligente",
+                icon: Activity,
+                gradient: "from-green-500 to-emerald-500"
+              }
             ].map((item, index) => (
-              <div key={item.step} className="text-center group">
-                <div className="w-20 h-20 bg-gradient-to-br from-primary to-secondary rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 relative">
-                  <span className="text-white font-bold text-xl">{item.step}</span>
-                  {index < 2 && (
-                    <div className="absolute -right-8 top-1/2 w-16 h-0.5 bg-gradient-to-r from-primary to-secondary transform translate-x-full hidden md:block" />
-                  )}
+              <div key={item.step} className="text-center group relative">
+                {/* Connection line */}
+                {index < 2 && (
+                  <div className="absolute top-10 left-1/2 w-full h-0.5 bg-gradient-to-r from-primary to-secondary hidden md:block z-0" />
+                )}
+                
+                <div className="relative z-10">
+                  <div className={`w-20 h-20 bg-gradient-to-br ${item.gradient} rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 shadow-lg relative`}>
+                    <item.icon className="w-10 h-10 text-white relative z-10" />
+                    <div className={`absolute inset-0 bg-gradient-to-br ${item.gradient} rounded-2xl blur opacity-50 group-hover:opacity-75 transition-opacity`} />
+                  </div>
+                  
+                  <div className={`inline-flex items-center justify-center px-4 py-2 rounded-full bg-gradient-to-r ${item.gradient} text-white font-bold mb-4 text-sm`}>
+                    ETAPA {item.step}
+                  </div>
+                  
+                  <h3 className="text-2xl font-bold mb-4 group-hover:text-primary transition-colors">
+                    {item.title}
+                  </h3>
+                  <p className="text-muted-foreground leading-relaxed">
+                    {item.description}
+                  </p>
                 </div>
-                <h3 className="text-2xl font-bold mb-4 group-hover:text-primary transition-colors">
-                  {item.title}
-                </h3>
-                <p className="text-muted-foreground">
-                  {item.description}
-                </p>
               </div>
             ))}
           </div>
@@ -322,73 +715,121 @@ const Landing = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-primary to-secondary">
-        <div className="container mx-auto px-6 text-center">
-          <h2 className="text-4xl font-bold text-white mb-6">
-            Pronto para Transformar seu Controle de Acesso?
-          </h2>
-          <p className="text-xl text-white/80 mb-8 max-w-2xl mx-auto">
-            Junte-se a centenas de empresas e escolas que já utilizam nossa solução
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button 
-              onClick={() => navigate("/dashboard")}
-              className="bg-white text-primary hover:bg-white/90 rounded-xl px-8 py-6 text-lg shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300"
-              size="lg"
-            >
-              <Zap className="w-5 h-5 mr-2" />
-              Começar Agora
-            </Button>
-            <Button 
-              variant="outline"
-              className="border-white text-white hover:bg-white/10 rounded-xl px-8 py-6 text-lg hover:scale-105 transition-all duration-300"
-              size="lg"
-            >
-              Agendar Demonstração
-            </Button>
+      <section className="py-32 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-r from-primary to-secondary" />
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#fff2_1px,transparent_1px),linear-gradient(to_bottom,#fff2_1px,transparent_1px)] bg-[size:4rem_4rem]" />
+        
+        <div className="container mx-auto px-6 text-center relative z-10">
+          <div className="max-w-4xl mx-auto space-y-8">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/20 text-white text-sm font-medium mb-4">
+              <Sparkles className="w-4 h-4" />
+              Comece Hoje Mesmo
+            </div>
+            
+            <h2 className="text-5xl lg:text-6xl font-bold text-white leading-tight">
+              Pronto para Transformar seu<br />Controle de Acesso?
+            </h2>
+            
+            <p className="text-xl text-white/90 max-w-2xl mx-auto leading-relaxed">
+              Junte-se a centenas de empresas e escolas que já utilizam nossa solução para garantir segurança e produtividade
+            </p>
+            
+            <div className="flex flex-col sm:flex-row gap-4 justify-center pt-8">
+              <Button 
+                onClick={() => navigate("/dashboard")}
+                className="bg-white text-primary hover:bg-white/90 rounded-xl px-8 py-6 text-lg shadow-2xl hover:shadow-white/20 hover:scale-105 transition-all duration-300 group"
+                size="lg"
+              >
+                <Zap className="w-5 h-5 mr-2 group-hover:rotate-12 transition-transform" />
+                Começar Gratuitamente
+              </Button>
+              <Button 
+                variant="outline"
+                className="border-2 border-white text-white hover:bg-white/10 rounded-xl px-8 py-6 text-lg hover:scale-105 transition-all duration-300"
+                size="lg"
+              >
+                <FileText className="w-5 h-5 mr-2" />
+                Agendar Demonstração
+              </Button>
+            </div>
+
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 pt-16">
+              {[
+                { number: "500+", label: "Empresas Confiantes" },
+                { number: "50k+", label: "Usuários Ativos" },
+                { number: "99.9%", label: "Disponibilidade" },
+                { number: "24/7", label: "Suporte Premium" }
+              ].map((stat, index) => (
+                <div 
+                  key={stat.label}
+                  className="text-center"
+                  style={{ animationDelay: `${index * 100}ms` }}
+                >
+                  <div className="text-4xl font-bold text-white mb-2">{stat.number}</div>
+                  <div className="text-sm text-white/80">{stat.label}</div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="bg-card border-t border-border py-16">
+      <footer className="bg-card border-t border-border py-20">
         <div className="container mx-auto px-6">
-          <div className="grid md:grid-cols-4 gap-8 mb-8">
-            <div>
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-10 h-10 bg-gradient-to-br from-primary to-secondary rounded-lg flex items-center justify-center">
-                  <Shield className="w-5 h-5 text-white" />
+          <div className="grid md:grid-cols-4 gap-12 mb-12">
+            <div className="md:col-span-2">
+              <div className="flex items-center gap-3 mb-6">
+                <div className="relative w-12 h-12 bg-gradient-to-br from-primary to-secondary rounded-xl flex items-center justify-center shadow-lg">
+                  <Shield className="w-6 h-6 text-white relative z-10" />
+                  <div className="absolute inset-0 bg-gradient-to-br from-primary to-secondary rounded-xl blur opacity-50" />
                 </div>
                 <div>
-                  <span className="font-bold text-lg">NexusCore Security</span>
+                  <span className="font-bold text-xl bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+                    NexusCore Security
+                  </span>
                   <div className="text-xs text-muted-foreground">Real-time Protection</div>
                 </div>
               </div>
-              <p className="text-sm text-muted-foreground">
-                Solução completa de monitoramento e controle de acesso web para empresas e instituições de ensino.
+              <p className="text-muted-foreground leading-relaxed max-w-md mb-6">
+                Solução completa de monitoramento e controle de acesso web para empresas e instituições de ensino. Protegendo sua organização 24/7.
               </p>
+              <div className="flex gap-4">
+                {[Globe, Shield, Lock].map((Icon, index) => (
+                  <div 
+                    key={index}
+                    className="w-10 h-10 bg-muted hover:bg-primary/10 rounded-lg flex items-center justify-center cursor-pointer transition-all duration-300 hover:scale-110 group"
+                  >
+                    <Icon className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
+                  </div>
+                ))}
+              </div>
             </div>
             
             {[
               {
                 title: "Produto",
-                links: ["Recursos", "Dashboard", "Preços", "API"]
+                links: ["Recursos", "Dashboard", "Preços", "API", "Integrações"]
               },
               {
                 title: "Empresa",
-                links: ["Sobre", "Blog", "Carreiras", "Contato"]
+                links: ["Sobre", "Blog", "Carreiras", "Contato", "Parceiros"]
               },
               {
                 title: "Legal",
-                links: ["Privacidade", "LGPD", "Termos", "Cookies"]
+                links: ["Privacidade", "LGPD", "Termos", "Cookies", "Segurança"]
               }
             ].map((section) => (
               <div key={section.title}>
-                <h4 className="font-semibold mb-4">{section.title}</h4>
-                <ul className="space-y-2 text-sm text-muted-foreground">
+                <h4 className="font-semibold mb-6 text-lg">{section.title}</h4>
+                <ul className="space-y-3">
                   {section.links.map((link) => (
                     <li key={link}>
-                      <a href="#" className="hover:text-primary transition-colors">
+                      <a 
+                        href="#" 
+                        className="text-muted-foreground hover:text-primary transition-colors flex items-center gap-2 group"
+                      >
+                        <ArrowRight className="w-3 h-3 opacity-0 group-hover:opacity-100 -ml-5 group-hover:ml-0 transition-all" />
                         {link}
                       </a>
                     </li>
@@ -398,12 +839,18 @@ const Landing = () => {
             ))}
           </div>
           
-          <div className="pt-8 border-t border-border text-center text-sm text-muted-foreground">
-            <div className="flex items-center justify-center gap-6 mb-4">
-              <span>© 2025 MonitorPro. Todos os direitos reservados.</span>
-              <div className="flex gap-4">
-                <Globe className="w-4 h-4 hover:text-primary cursor-pointer transition-colors" />
-                <Lock className="w-4 h-4 hover:text-primary cursor-pointer transition-colors" />
+          <div className="pt-8 border-t border-border">
+            <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+              <span className="text-sm text-muted-foreground">
+                © 2025 NexusCore Security. Todos os direitos reservados.
+              </span>
+              <div className="flex items-center gap-6 text-sm text-muted-foreground">
+                <span className="flex items-center gap-2">
+                  <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+                  Todos os sistemas operacionais
+                </span>
+                <span>|</span>
+                <span>Feito com ❤️ no Brasil</span>
               </div>
             </div>
           </div>
@@ -411,8 +858,31 @@ const Landing = () => {
       </footer>
 
       <CookieBanner />
+      
+      <style>{`
+        @keyframes gradient {
+          0%, 100% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+        }
+        
+        .animate-gradient {
+          animation: gradient 3s ease infinite;
+        }
+        
+        .delay-75 {
+          animation-delay: 75ms;
+        }
+        
+        .delay-150 {
+          animation-delay: 150ms;
+        }
+        
+        .delay-1000 {
+          animation-delay: 1000ms;
+        }
+      `}</style>
     </div>
   );
 };
 
-export default Landing;
+export default Landing; 
