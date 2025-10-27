@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -7,12 +7,24 @@ import { Label } from "@/components/ui/label";
 import { Shield, Loader2 } from "lucide-react";
 import { authService } from "@/services/authService";
 import { useToast } from "@/hooks/use-toast";
+import { useAuth } from "@/contexts/AuthContext";
+import { useTranslation } from "react-i18next";
+import { ThemeToggle } from "@/components/ThemeToggle";
+import { LanguageSelector } from "@/components/LanguageSelector";
 
 const Login = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
+  const { isAuthenticated, isLoading: authLoading } = useAuth();
+  const { t } = useTranslation();
   const [isLogin, setIsLogin] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    if (isAuthenticated && !authLoading) {
+      navigate("/dashboard", { replace: true });
+    }
+  }, [isAuthenticated, authLoading, navigate]);
   
   const [loginData, setLoginData] = useState({
     email: "",
@@ -34,17 +46,16 @@ const Login = () => {
     try {
       await authService.login(loginData);
       toast({
-        title: "Login realizado!",
-        description: "Bem-vindo de volta ao sistema.",
+        title: t('login.loginSuccess'),
+        description: t('login.loginSuccessDescription'),
       });
-      navigate("/dashboard");
+      // Don't navigate here - useEffect will handle it after auth state updates
     } catch (error: any) {
       toast({
-        title: "Erro ao fazer login",
+        title: t('login.loginError'),
         description: error.message,
         variant: "destructive",
       });
-    } finally {
       setIsLoading(false);
     }
   };
@@ -54,8 +65,8 @@ const Login = () => {
 
     if (registerData.password !== registerData.confirmPassword) {
       toast({
-        title: "Erro",
-        description: "As senhas não coincidem",
+        title: t('common.error'),
+        description: t('login.passwordMismatch'),
         variant: "destructive",
       });
       return;
@@ -72,23 +83,27 @@ const Login = () => {
       });
       
       toast({
-        title: "Conta criada!",
-        description: "Sua conta foi criada com sucesso.",
+        title: t('login.accountCreated'),
+        description: t('login.accountCreatedDescription'),
       });
-      navigate("/dashboard");
+      // Don't navigate here - useEffect will handle it after auth state updates
     } catch (error: any) {
       toast({
-        title: "Erro ao criar conta",
+        title: t('login.createAccountError'),
         description: error.message,
         variant: "destructive",
       });
-    } finally {
       setIsLoading(false);
     }
   };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-background to-primary/5 flex items-center justify-center p-6">
+      <div className="absolute top-4 right-4 flex gap-2 z-10">
+        <LanguageSelector />
+        <ThemeToggle />
+      </div>
+      
       <div className="absolute inset-0 -z-10">
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl animate-pulse" />
         <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-secondary/10 rounded-full blur-3xl animate-pulse delay-1000" />
@@ -102,19 +117,19 @@ const Login = () => {
             </div>
           </div>
           <CardTitle className="text-2xl">
-            {isLogin ? "Login" : "Criar Conta"}
+            {isLogin ? t('login.title') : t('login.createAccountTitle')}
           </CardTitle>
           <CardDescription>
             {isLogin 
-              ? "Entre com suas credenciais para acessar o sistema" 
-              : "Preencha os dados para criar sua conta"}
+              ? t('login.description')
+              : t('login.createAccountDescription')}
           </CardDescription>
         </CardHeader>
         <CardContent>
           {isLogin ? (
             <form onSubmit={handleLogin} className="space-y-4">
               <div className="space-y-2">
-                <Label htmlFor="email">Email</Label>
+                <Label htmlFor="email">{t('common.email')}</Label>
                 <Input
                   id="email"
                   type="email"
@@ -126,7 +141,7 @@ const Login = () => {
                 />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="password">Senha</Label>
+                <Label htmlFor="password">{t('common.password')}</Label>
                 <Input
                   id="password"
                   type="password"
@@ -139,27 +154,27 @@ const Login = () => {
               </div>
               <Button 
                 type="submit" 
-                className="w-full bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90"
+                className="w-full"
                 disabled={isLoading}
               >
                 {isLoading ? (
                   <>
                     <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                    Entrando...
+                    {t('login.entering')}
                   </>
                 ) : (
-                  "Entrar"
+                  t('login.enterButton')
                 )}
               </Button>
             </form>
           ) : (
             <form onSubmit={handleRegister} className="space-y-4">
               <div className="space-y-2">
-                <Label htmlFor="fullName">Nome Completo</Label>
+                <Label htmlFor="fullName">{t('common.fullName')}</Label>
                 <Input
                   id="fullName"
                   type="text"
-                  placeholder="Seu Nome Completo"
+                  placeholder={t('common.fullName')}
                   value={registerData.fullName}
                   onChange={(e) => setRegisterData({ ...registerData, fullName: e.target.value })}
                   required
@@ -167,7 +182,7 @@ const Login = () => {
                 />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="reg_username">Usuário</Label>
+                <Label htmlFor="reg_username">{t('common.username')}</Label>
                 <Input
                   id="reg_username"
                   type="text"
@@ -179,7 +194,7 @@ const Login = () => {
                 />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="email">Email</Label>
+                <Label htmlFor="email">{t('common.email')}</Label>
                 <Input
                   id="email"
                   type="email"
@@ -191,7 +206,7 @@ const Login = () => {
                 />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="reg_password">Senha</Label>
+                <Label htmlFor="reg_password">{t('common.password')}</Label>
                 <Input
                   id="reg_password"
                   type="password"
@@ -203,7 +218,7 @@ const Login = () => {
                 />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="confirm_password">Confirmar Senha</Label>
+                <Label htmlFor="confirm_password">{t('common.confirmPassword')}</Label>
                 <Input
                   id="confirm_password"
                   type="password"
@@ -216,16 +231,16 @@ const Login = () => {
               </div>
               <Button 
                 type="submit" 
-                className="w-full bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90"
+                className="w-full"
                 disabled={isLoading}
               >
                 {isLoading ? (
                   <>
                     <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                    Criando conta...
+                    {t('login.creatingAccount')}
                   </>
                 ) : (
-                  "Criar Conta"
+                  t('common.createAccount')
                 )}
               </Button>
             </form>
@@ -238,7 +253,7 @@ const Login = () => {
               className="text-sm text-primary hover:underline"
               disabled={isLoading}
             >
-              {isLogin ? "Não tem uma conta? Registre-se" : "Já tem uma conta? Faça login"}
+              {isLogin ? t('common.noAccount') : t('common.alreadyHaveAccount')}
             </button>
           </div>
         </CardContent>

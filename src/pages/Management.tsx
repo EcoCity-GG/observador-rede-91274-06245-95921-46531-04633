@@ -20,6 +20,8 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
+import { ThemeToggle } from "@/components/ThemeToggle";
+import { LanguageSelector } from "@/components/LanguageSelector";
 
 const Management = () => {
   const navigate = useNavigate();
@@ -93,9 +95,14 @@ const Management = () => {
               <div className="p-2 rounded-lg bg-gradient-to-br from-primary to-secondary border border-primary/20 hover:scale-110 transition-transform duration-300 cursor-pointer">
                 <Shield className="w-6 h-6 text-white" />
               </div>
-              <h1 className="text-2xl font-bold hover:text-primary transition-colors">Gerenciamento de Equipes</h1>
+              <div>
+                <h1 className="text-xl font-bold hover:text-primary transition-colors">NexusCore Security</h1>
+                <p className="text-xs text-muted-foreground -mt-1">Gerenciamento</p>
+              </div>
             </div>
             <div className="flex items-center gap-4">
+              <LanguageSelector />
+              <ThemeToggle />
               <Button 
                 onClick={() => navigate("/dashboard")} 
                 variant="outline"

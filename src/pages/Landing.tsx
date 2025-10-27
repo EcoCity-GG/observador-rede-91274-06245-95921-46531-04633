@@ -112,9 +112,9 @@ const Landing = () => {
                 </div>
                 <div className="flex flex-col">
                   <span className="font-bold text-xl bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-                    MonitorPro
+                    NexusCore Security
                   </span>
-                  <span className="text-xs text-muted-foreground -mt-1">Security & Analytics</span>
+                  <span className="text-xs text-muted-foreground -mt-1">Real-time Protection</span>
                 </div>
               </div>
               
@@ -139,7 +139,8 @@ const Landing = () => {
               <ThemeToggle />
               <Button 
                 onClick={() => navigate("/dashboard")}
-                className="bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90 text-white rounded-xl px-6 shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 group"
+                variant="gradient"
+                className="rounded-xl px-6 shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 group"
               >
                 <Zap className="w-4 h-4 mr-2 group-hover:scale-110 transition-transform" />
                 Acessar Dashboard
@@ -175,7 +176,8 @@ const Landing = () => {
               <div className="flex flex-col sm:flex-row gap-4">
                 <Button 
                   onClick={() => navigate("/dashboard")}
-                  className="bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90 text-white rounded-xl px-8 py-6 text-lg shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 group"
+                  variant="gradient"
+                  className="rounded-xl px-8 py-6 text-lg shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 group"
                   size="lg"
                 >
                   <Activity className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform" />
@@ -365,8 +367,8 @@ const Landing = () => {
                   <Shield className="w-5 h-5 text-white" />
                 </div>
                 <div>
-                  <span className="font-bold text-lg">MonitorPro</span>
-                  <div className="text-xs text-muted-foreground">Security & Analytics</div>
+                  <span className="font-bold text-lg">NexusCore Security</span>
+                  <div className="text-xs text-muted-foreground">Real-time Protection</div>
                 </div>
               </div>
               <p className="text-sm text-muted-foreground">

@@ -8,6 +8,8 @@ import { Shield, ArrowLeft, Loader2 } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import { authService } from "@/services/authService";
 import { toast } from "sonner";
+import { ThemeToggle } from "@/components/ThemeToggle";
+import { LanguageSelector } from "@/components/LanguageSelector";
 
 const Profile = () => {
   const navigate = useNavigate();
@@ -93,13 +95,17 @@ const Profile = () => {
               </div>
               <h1 className="text-2xl font-bold">Meu Perfil</h1>
             </div>
-            <Button 
-              onClick={() => navigate("/dashboard")} 
-              variant="outline"
-              className="hover:bg-primary hover:text-white hover:border-primary transition-all duration-300"
-            >
-              Voltar ao Dashboard
-            </Button>
+            <div className="flex items-center gap-3">
+              <LanguageSelector />
+              <ThemeToggle />
+              <Button 
+                onClick={() => navigate("/dashboard")} 
+                variant="outline"
+                className="hover:bg-primary hover:text-white hover:border-primary transition-all duration-300"
+              >
+                Voltar ao Dashboard
+              </Button>
+            </div>
           </div>
         </div>
       </header>
@@ -149,7 +155,7 @@ const Profile = () => {
               </div>
               <Button 
                 type="submit" 
-                className="bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90"
+                variant="gradient"
                 disabled={isLoading}
               >
                 {isLoading ? (
@@ -214,7 +220,7 @@ const Profile = () => {
               </div>
               <Button 
                 type="submit" 
-                className="bg-gradient-to-r from-yellow-500 to-orange-500 hover:from-yellow-600 hover:to-orange-600"
+                variant="warning"
                 disabled={isChangingPassword}
               >
                 {isChangingPassword ? (

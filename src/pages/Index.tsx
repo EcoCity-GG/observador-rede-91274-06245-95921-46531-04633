@@ -9,10 +9,14 @@ import { useNavigate } from "react-router-dom";
 import { useDashboardData } from "@/hooks/useDashboardData";
 import { FilterProvider } from "@/contexts/FilterContext";
 import { useMemo } from "react";
+import { ThemeToggle } from "@/components/ThemeToggle";
+import { LanguageSelector } from "@/components/LanguageSelector";
+import { useAuth } from "@/contexts/AuthContext";
 
 const Index = () => {
   const navigate = useNavigate();
   const { data, isLoading } = useDashboardData();
+  const { logout, user } = useAuth();
 
   const stats = useMemo(() => {
     if (!data) return { totalUsers: 0, totalAlerts: 0, aiDetections: 0, totalLogs: 0 };
@@ -42,10 +46,22 @@ const Index = () => {
                 <div className="p-2 rounded-lg bg-gradient-to-br from-primary to-secondary border border-primary/20 hover:scale-110 transition-transform duration-300">
                   <Shield className="w-6 h-6 text-white" />
                 </div>
-                <h1 className="text-2xl font-bold hover:text-primary transition-colors">Sistema de Monitoramento</h1>
+                <div>
+                  <h1 className="text-xl font-bold hover:text-primary transition-colors">NexusCore Security</h1>
+                  <p className="text-xs text-muted-foreground -mt-1">Real-time Protection</p>
+                </div>
               </div>
               <div className="flex items-center gap-4">
-                <span className="text-sm text-muted-foreground">Bem-vindo, Prof Gu</span>
+                <span className="text-sm text-muted-foreground">Bem-vindo, {user?.full_name || 'Professor'}</span>
+                <LanguageSelector />
+                <ThemeToggle />
+                <Button 
+                  onClick={() => navigate("/perfil")} 
+                  variant="ghost" 
+                  className="gap-2"
+                >
+                  Perfil
+                </Button>
                 <Button 
                   onClick={() => navigate("/management")} 
                   variant="outline" 
@@ -54,7 +70,11 @@ const Index = () => {
                   <Settings className="w-4 h-4" />
                   Gerenciar
                 </Button>
-                <Button variant="destructive" className="hover:scale-105 transition-transform duration-300">
+                <Button 
+                  variant="destructive" 
+                  className="hover:scale-105 transition-transform duration-300"
+                  onClick={logout}
+                >
                   SAIR
                 </Button>
               </div>
