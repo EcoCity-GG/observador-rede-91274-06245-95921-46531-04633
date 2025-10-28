@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { LanguageSelector } from "@/components/LanguageSelector";
+import empresarioImageUrl from '@/assets/empresario.png';
 import { CookieBanner } from "@/components/CookieBanner";
 import { useEffect, useState } from "react";
 import { useDashboardData } from "@/hooks/useDashboardData"; //
