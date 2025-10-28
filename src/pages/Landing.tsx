@@ -292,12 +292,6 @@ const Landing = () => {
 
               {/* O Card do Dashboard existente */}
               <div className="relative z-10 bg-card border border-border/50 rounded-2xl p-6 shadow-2xl hover:shadow-primary/10 transition-all duration-500">
-                {/* ... (restante do conteúdo do card) ... */}
-              </div>
-            </div>
-
-              {/* O Card do Dashboard existente */}
-              <div className="relative z-10 bg-card border border-border/50 rounded-2xl p-6 shadow-2xl hover:shadow-primary/10 transition-all duration-500">
                 <div className="flex items-center gap-2 mb-6">
                   <div className="flex gap-1">
                     <div className="w-3 h-3 rounded-full bg-red-500 animate-pulse" />
