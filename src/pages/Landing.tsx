@@ -259,9 +259,10 @@ useEffect(() => {
               </div>
 
               <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 pt-8">
-                {statsDisplay.map((stat, index) => ( //
+                {statsDisplay.map((stat, index) => (
                   <div
-                    key={stat.label}
+                    // ===> ADICIONAR key AQUI <===
+                    key={stat.label || index} // Usar stat.label (se único) ou index como fallback
                     className="text-center group cursor-pointer"
                     style={{ animationDelay: `${index * 100}ms` }}
                   >
@@ -271,8 +272,7 @@ useEffect(() => {
                     <div className="text-sm text-muted-foreground">{stat.label}</div>
                   </div>
                 ))}
-              </div>
-            </div>
+              </div>  
 
             {/* Right Column: Dashboard Mockup */}
             <div className={`relative transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
