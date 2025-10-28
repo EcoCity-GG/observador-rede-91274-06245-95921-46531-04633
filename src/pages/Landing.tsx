@@ -4,6 +4,7 @@ import { ThemeToggle } from "@/components/ThemeToggle";
 import { LanguageSelector } from "@/components/LanguageSelector";
 import { CookieBanner } from "@/components/CookieBanner";
 import { useEffect, useState } from "react";
+import EmpresarioSvg from '@/assets/empresario.svg?react';
 import { useDashboardData } from "@/hooks/useDashboardData"; //
 import {
   Shield,
@@ -278,15 +279,14 @@ const Landing = () => {
               <div className="absolute -inset-8 bg-gradient-to-r from-primary/20 to-secondary/20 rounded-3xl blur-3xl animate-pulse" /> {/* */}
 
               {/* ===> IMAGEM DO EMPRESÁRIO ADICIONADA AQUI <=== */}
-            <img
-              // src="/path/to/your/empresario-sorrindo.png" // <-- SUBSTITUA PELO CAMINHO CORRETO
-              src="https://via.placeholder.com/300x400?text=Empresario" // <-- Placeholder válido
-              alt="Empresário sorrindo com o dashboard do MonitorPro"
-              className="absolute -top-10 right-0 w-64 h-auto object-contain z-20 
-                         lg:w-72 lg:-right-16 lg:-top-16 
-                         transform transition-transform duration-300 hover:scale-105" // <-- Classes parecem OK
-              // Ajuste '-top-xx', '-right-xx' e 'w-xx' conforme necessário
-              />  
+            <EmpresarioSvg
+                      aria-label="Empresário sorrindo com o dashboard do MonitorPro" // Melhor usar aria-label para SVGs decorativos
+                      className="absolute -top-10 right-0 w-64 h-auto z-20 
+                                 lg:w-72 lg:-right-16 lg:-top-16 
+                                 transform transition-transform duration-300 hover:scale-105
+                                 text-gray-500" // Exemplo: cor de preenchimento padrão via Tailwind
+                      // Ajuste as classes de posicionamento, tamanho e *cor* (fill/stroke) conforme necessário
+                    /> 
               {/* ===> FIM DA IMAGEM DO EMPRESÁRIO <=== */}
 
               <div className="relative z-10 bg-card border border-border/50 rounded-2xl p-6 shadow-2xl hover:shadow-primary/10 transition-all duration-500"> {/* Adicionado z-10 */}
