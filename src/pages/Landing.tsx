@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { LanguageSelector } from "@/components/LanguageSelector";
 import { CookieBanner } from "@/components/CookieBanner";
+import { PricingDialog } from "@/components/PricingDialog";
 import { useEffect, useState } from "react";
 import { useDashboardData } from "@/hooks/useDashboardData"; //
 import {
@@ -39,6 +40,7 @@ const Landing = () => {
   const navigate = useNavigate();
   const [isVisible, setIsVisible] = useState(false);
   const [activeFeature, setActiveFeature] = useState(0);
+  const [pricingDialogOpen, setPricingDialogOpen] = useState(false);
   const { data } = useDashboardData();
   const stats = data ? { totalUsers: data.summary.length, totalAlerts: 0, aiDetections: 0 } : null;
 
@@ -148,7 +150,12 @@ const Landing = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background relative">
+      {/* Gradiente Animado de Fundo - Atrás de tudo */}
+      <div className="fixed inset-0 -z-20">
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-secondary/20 to-accent/20 bg-400% animate-background-pan" />
+      </div>
+
       {/* Vlibras Widget Placeholder */}
       <div data-vw="true" className="enabled">
         <div data-vw-access-button="true" className="active"></div>
@@ -159,11 +166,13 @@ const Landing = () => {
 
       {/* Background Effects */}
       <div className="fixed inset-0 -z-10">
-        <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-primary/5" />
+        <div className="absolute inset-0 bg-gradient-to-br from-background/90 via-background/80 to-background/90" />
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl animate-pulse" />
         <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-secondary/10 rounded-full blur-3xl animate-pulse delay-1000" />
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#8882_1px,transparent_1px),linear-gradient(to_bottom,#8882_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,#000_70%,transparent_110%)]" />
       </div>
+
+      <PricingDialog open={pricingDialogOpen} onOpenChange={setPricingDialogOpen} />
 
       {/* Navigation */}
       <nav className="bg-background/80 backdrop-blur-xl border-b border-border/50 sticky top-0 z-50">
@@ -251,6 +260,7 @@ const Landing = () => {
                   <span className="relative z-10">Acessar a Demo</span>
                 </Button>
                 <Button
+                  onClick={() => setPricingDialogOpen(true)}
                   variant="outline"
                   className="rounded-xl px-8 py-6 text-lg border-2 hover:border-primary hover:bg-primary/5 transition-all duration-300 group"
                   size="lg"
@@ -660,6 +670,7 @@ const Landing = () => {
                 Começar Monitoramento
               </Button>
               <Button
+                onClick={() => setPricingDialogOpen(true)}
                 variant="outline"
                 className="border-2 border-white text-white hover:bg-white/10 rounded-xl px-8 py-6 text-lg hover:scale-105 transition-all duration-300"
                 size="lg"

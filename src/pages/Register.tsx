@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Shield, Loader2 } from "lucide-react";
+import { Loader2 } from "lucide-react";
 import { authService } from "@/services/authService";
 import { toast } from "sonner";
 import { ThemeToggle } from "@/components/ThemeToggle";
@@ -20,6 +20,9 @@ const Register = () => {
     email: "",
     password: "",
     confirmPassword: "",
+    cpf: "",
+    birthDate: "",
+    position: "",
   });
 
   const handleRegister = async (e: React.FormEvent) => {
@@ -43,10 +46,13 @@ const Register = () => {
         username: registerData.username,
         email: registerData.email,
         password: registerData.password,
+        cpf: registerData.cpf,
+        birthDate: registerData.birthDate,
+        position: registerData.position,
       });
       
-      toast.success("Conta criada com sucesso!");
-      navigate("/dashboard");
+      toast.success("Conta criada! Verifique seu email para confirmar o cadastro.");
+      navigate("/login");
     } catch (error: any) {
       toast.error(error.message || "Erro ao criar conta");
     } finally {
@@ -112,6 +118,41 @@ const Register = () => {
                 placeholder="seu@email.com"
                 value={registerData.email}
                 onChange={(e) => setRegisterData({ ...registerData, email: e.target.value })}
+                required
+                disabled={isLoading}
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="cpf">CPF</Label>
+              <Input
+                id="cpf"
+                type="text"
+                placeholder="000.000.000-00"
+                value={registerData.cpf}
+                onChange={(e) => setRegisterData({ ...registerData, cpf: e.target.value })}
+                required
+                disabled={isLoading}
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="birthDate">Data de Nascimento</Label>
+              <Input
+                id="birthDate"
+                type="date"
+                value={registerData.birthDate}
+                onChange={(e) => setRegisterData({ ...registerData, birthDate: e.target.value })}
+                required
+                disabled={isLoading}
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="position">Cargo</Label>
+              <Input
+                id="position"
+                type="text"
+                placeholder="Ex: Gerente, Professor, etc"
+                value={registerData.position}
+                onChange={(e) => setRegisterData({ ...registerData, position: e.target.value })}
                 required
                 disabled={isLoading}
               />
