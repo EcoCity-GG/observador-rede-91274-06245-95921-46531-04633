@@ -1,11 +1,10 @@
-// src/pages/Landing.tsx
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { LanguageSelector } from "@/components/LanguageSelector";
 import { CookieBanner } from "@/components/CookieBanner";
 import { useEffect, useState } from "react";
-import { useDashboardData } from "@/hooks/useDashboardData";
+import { useDashboardData } from "@/hooks/useDashboardData"; //
 import {
   Shield,
   Eye,
@@ -44,27 +43,29 @@ const Landing = () => {
   const { data } = useDashboardData();
   const stats = data ? { totalUsers: data.summary.length, totalAlerts: 0, aiDetections: 0 } : null;
 
+  // src/pages/Landing.tsx
   useEffect(() => {
     setIsVisible(true);
 
-    const script = document.createElement("script");
-    script.src = "https://vlibras.gov.br/app/vlibras-plugin.js";
-    script.async = true;
-    document.body.appendChild(script);
+    // Vlibras (código comentado conforme sua versão)
+    // const script = document.createElement("script");
+    // script.src = "https://vlibras.gov.br/app/vlibras-plugin.js";
+    // script.async = true;
+    // document.body.appendChild(script);
 
-    script.onload = () => {
-      // @ts-ignore
-      new window.VLibras.Widget("https://vlibras.gov.br/app");
-    };
+    // script.onload = () => {
+    //   // @ts-ignore
+    //   new window.VLibras.Widget("https://vlibras.gov.br/app");
+    // };
 
     const interval = setInterval(() => {
       setActiveFeature((prev) => (prev + 1) % 5); // Atualizado para 5 features
     }, 5000);
 
     return () => {
-      if (script.parentNode) {
-        document.body.removeChild(script);
-      }
+      // if (script.parentNode) {
+      //   document.body.removeChild(script);
+      // }
       clearInterval(interval);
     };
   }, []);
@@ -149,7 +150,7 @@ const Landing = () => {
 
   return (
     <div className="min-h-screen bg-background overflow-hidden">
-      {/* Vlibras Widget */}
+      {/* Vlibras Widget Placeholder */}
       <div data-vw="true" className="enabled">
         <div data-vw-access-button="true" className="active"></div>
         <div data-vw-plugin-wrapper="true">
@@ -167,10 +168,9 @@ const Landing = () => {
 
       {/* Navigation */}
       <nav className="bg-background/80 backdrop-blur-xl border-b border-border/50 sticky top-0 z-50">
-        <div className="container mx-auto px-6 py-4">
+         <div className="container mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-12">
-              {/* Logo e Nome */}
               <div className="flex items-center gap-3 group cursor-pointer" onClick={() => navigate("/")}>
                 <img
                   src="https://i.ibb.co/gF7msvyr/LOGO-PERFIL-1.png"
@@ -184,11 +184,11 @@ const Landing = () => {
                   <span className="text-xs text-muted-foreground -mt-1">Web Access Monitor</span>
                 </div>
               </div>
-              {/* Links de Navegação */}
+
               <div className="hidden lg:flex items-center gap-8">
                 {["Home", "Recursos", "Dashboard", "Preços", "Contato"].map((item) => (
                   <a
-                    key={item} // Key adicionada aqui
+                    key={item} // Key adicionada
                     href={`#${item.toLowerCase()}`}
                     className="text-foreground/80 hover:text-primary transition-all duration-300 font-medium relative group"
                   >
@@ -198,7 +198,7 @@ const Landing = () => {
                 ))}
               </div>
             </div>
-            {/* Controles Direita */}
+
             <div className="flex items-center gap-4">
               <LanguageSelector />
               <ThemeToggle />
@@ -277,7 +277,7 @@ const Landing = () => {
               </div>
             </div>
 
-            {/* Right Column: Dashboard Mockup */}
+            {/* Right Column: Dashboard Mockup + Image */}
             <div className={`relative transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
               <div className="absolute -inset-8 bg-gradient-to-r from-primary/20 to-secondary/20 rounded-3xl blur-3xl animate-pulse" />
 
@@ -390,13 +390,11 @@ const Landing = () => {
                   className={`grid lg:grid-cols-2 gap-12 items-center`}
                 >
                   <div className={`space-y-6 ${!isEven ? 'lg:order-2' : ''}`}>
-                    {/* ... (conteúdo da feature esquerda) ... */}
                     <div className="space-y-4">
                       <div className={`inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br ${feature.gradient} shadow-lg relative group`}>
                         <FeatureIcon className="w-8 h-8 text-white relative z-10" />
                         <div className={`absolute inset-0 bg-gradient-to-br ${feature.gradient} rounded-2xl blur opacity-50 group-hover:opacity-75 transition-opacity`} />
                       </div>
-
                       <div>
                         <h3 className="text-4xl font-bold mb-4 bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent">
                           {feature.title}
@@ -406,7 +404,6 @@ const Landing = () => {
                         </p>
                       </div>
                     </div>
-
                     <div className="space-y-3">
                       {feature.details.map((detail, idx) => (
                         <div
@@ -423,7 +420,7 @@ const Landing = () => {
                         </div>
                       ))}
                     </div>
-                     <div className={`inline-flex items-center gap-4 px-6 py-4 rounded-2xl bg-gradient-to-br ${feature.bgGradient} border border-border/50`}>
+                    <div className={`inline-flex items-center gap-4 px-6 py-4 rounded-2xl bg-gradient-to-br ${feature.bgGradient} border border-border/50`}>
                       <div>
                         <div className={`text-3xl font-bold bg-gradient-to-r ${feature.gradient} bg-clip-text text-transparent`}>
                           {feature.metric}
@@ -434,13 +431,11 @@ const Landing = () => {
                     </div>
                   </div>
                   <div className={`relative ${!isEven ? 'lg:order-1' : ''}`}>
-                    {/* ... (conteúdo da feature direita/imagem mock) ... */}
-                      <div className={`absolute -inset-4 bg-gradient-to-br ${feature.gradient} opacity-20 rounded-3xl blur-2xl`} />
+                    <div className={`absolute -inset-4 bg-gradient-to-br ${feature.gradient} opacity-20 rounded-3xl blur-2xl`} />
                     <div className="relative bg-card border border-border/50 rounded-3xl p-8 shadow-2xl hover:shadow-primary/10 transition-all duration-500 overflow-hidden group">
                       <div className="absolute inset-0 opacity-5">
                         <div className="absolute inset-0 bg-[linear-gradient(to_right,#8882_1px,transparent_1px),linear-gradient(to_bottom,#8882_1px,transparent_1px)] bg-[size:2rem_2rem]" />
                       </div>
-
                       <div className="relative z-10 space-y-6">
                         <div className="flex items-center justify-between">
                           <div className="flex items-center gap-3">
@@ -454,12 +449,114 @@ const Landing = () => {
                           </div>
                         </div>
 
-                        {/* Os exemplos de mock data já estão aqui, sem necessidade de loop */}
-                        {index === 0 && ( /* Mock para Monitoramento */ )}
-                        {index === 1 && ( /* Mock para Alertas */ )}
-                        {index === 2 && ( /* Mock para Dashboard */ )}
-                        {index === 3 && ( /* Mock para Gestão */ )}
-                        {index === 4 && ( /* Mock para Relatórios */ )}
+                        {/* Mocks condicionais (como no código original) */}
+                        {index === 0 && (
+                          <div className="space-y-4">
+                            <div className="grid grid-cols-3 gap-3">
+                              {["Sites Visitados", "URLs Únicas", "Tempo Online"].map((label, i) => (
+                                <div key={i} className={`h-24 bg-gradient-to-br ${feature.bgGradient} rounded-xl border border-border/50 flex flex-col items-center justify-center`}>
+                                  <Eye className="w-6 h-6 text-primary animate-pulse mb-2" style={{ animationDelay: `${i * 200}ms` }} />
+                                  <div className="text-xs text-muted-foreground text-center px-1">{label}</div>
+                                </div>
+                              ))}
+                            </div>
+                            <div className="h-32 bg-gradient-to-br from-muted to-muted/50 rounded-xl border border-border/50 flex items-center justify-center">
+                              <div className="text-center">
+                                <div className="text-2xl font-bold text-primary">1,284</div>
+                                <div className="text-xs text-muted-foreground">Sites monitorados hoje</div>
+                              </div>
+                            </div>
+                          </div>
+                        )}
+                        {index === 1 && (
+                           <div className="space-y-3">
+                            {[
+                              { label: "Redes Sociais Bloqueadas", severity: "high", time: "Agora" },
+                              { label: "Site de Jogos Detectado", severity: "medium", time: "2 min atrás" },
+                              { label: "Conteúdo Impróprio", severity: "high", time: "5 min atrás" }
+                            ].map((alert, i) => (
+                              <div
+                                key={i} // Key adicionada
+                                className="flex items-center gap-3 p-4 bg-muted/50 rounded-xl border border-border/50 hover:bg-muted transition-colors"
+                                style={{ animationDelay: `${i * 150}ms` }}
+                              >
+                                <AlertTriangle className={`w-5 h-5 ${alert.severity === 'high' ? 'text-red-500' : 'text-amber-500'} animate-pulse`} />
+                                <div className="flex-1">
+                                  <div className="font-medium text-sm">{alert.label}</div>
+                                  <div className="text-xs text-muted-foreground">{alert.time}</div>
+                                </div>
+                                <ArrowRight className="w-4 h-4 text-muted-foreground" />
+                              </div>
+                            ))}
+                          </div>
+                        )}
+                         {index === 2 && (
+                          <div className="space-y-4">
+                            <div className="grid grid-cols-2 gap-3">
+                              {[
+                                { label: "Sites Produtivos", value: "67%", color: "green" },
+                                { label: "Sites Bloqueados", value: "12%", color: "red" }
+                              ].map((metric, i) => (
+                                <div key={i} className="p-4 bg-gradient-to-br from-muted to-muted/50 rounded-xl border border-border/50">
+                                  <div className={`text-2xl font-bold text-${metric.color}-500`}>{metric.value}</div>
+                                  <div className="text-xs text-muted-foreground">{metric.label}</div>
+                                </div>
+                              ))}
+                            </div>
+                            <div className="h-40 bg-gradient-to-br from-muted to-muted/50 rounded-xl border border-border/50 flex items-center justify-center relative overflow-hidden">
+                              <BarChart3 className="w-12 h-12 text-primary/50" />
+                              <div className="absolute inset-0 bg-gradient-to-t from-primary/10 to-transparent" />
+                            </div>
+                          </div>
+                        )}
+                        {index === 3 && (
+                           <div className="space-y-3">
+                            {[
+                              { name: "Marketing", sites: 234 },
+                              { name: "Desenvolvimento", sites: 189 },
+                              { name: "Administrativo", sites: 156 }
+                            ].map((teamData, i) => (
+                              <div
+                                key={i} // Key adicionada
+                                className="flex items-center gap-3 p-4 bg-muted/50 rounded-xl border border-border/50 hover:bg-muted transition-colors"
+                                style={{ animationDelay: `${i * 150}ms` }}
+                              >
+                                <Users className="w-5 h-5 text-primary" />
+                                <div className="flex-1">
+                                  <div className="font-medium text-sm">{teamData.name}</div>
+                                  <div className="text-xs text-muted-foreground">{teamData.sites} sites acessados hoje</div>
+                                </div>
+                                <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+                              </div>
+                            ))}
+                          </div>
+                        )}
+                        {index === 4 && (
+                           <div className="space-y-4">
+                            <div className="grid grid-cols-2 gap-3">
+                              {["PDF", "Excel", "CSV", "JSON"].map((format, i) => (
+                                <div
+                                  key={i} // Key adicionada
+                                  className="p-3 bg-gradient-to-br from-muted to-muted/50 rounded-xl border border-border/50 text-center hover:scale-105 transition-transform cursor-pointer"
+                                >
+                                  <FileText className="w-5 h-5 text-primary mx-auto mb-2" />
+                                  <div className="text-xs font-medium">{format}</div>
+                                </div>
+                              ))}
+                            </div>
+                            <div className="p-4 bg-muted/50 rounded-xl border border-border/50">
+                              <div className="flex items-center justify-between mb-3">
+                                <span className="text-sm font-medium">Relatório de Acessos</span>
+                                <span className="text-xs text-muted-foreground">Último mês</span>
+                              </div>
+                              <div className="space-y-2">
+                                <div className="h-2 bg-primary/20 rounded-full overflow-hidden">
+                                  <div className="h-full bg-gradient-to-r from-primary to-secondary w-3/4 animate-pulse" />
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        )}
 
                         <div className="pt-4 border-t border-border/50 flex items-center justify-between">
                           <div className="flex items-center gap-2">
@@ -498,7 +595,6 @@ const Landing = () => {
               Sistema inteligente que rastreia e analisa todos os acessos web em tempo real
             </p>
           </div>
-
           <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
             {[
               {
@@ -549,15 +645,12 @@ const Landing = () => {
               <Sparkles className="w-4 h-4" />
               Comece Hoje Mesmo
             </div>
-
             <h2 className="text-5xl lg:text-6xl font-bold text-white leading-tight">
               Pronto para Monitorar<br />Acessos Web com Inteligência?
             </h2>
-
             <p className="text-xl text-white/90 max-w-2xl mx-auto leading-relaxed">
               Junte-se a centenas de empresas e escolas que já protegem sua produtividade monitorando sites indevidos
             </p>
-
             <div className="flex flex-col sm:flex-row gap-4 justify-center pt-8">
               <Button
                 onClick={() => navigate("/dashboard")}
@@ -576,7 +669,6 @@ const Landing = () => {
                 Ver Planos
               </Button>
             </div>
-
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8 pt-16">
               {[
                 { number: "500+", label: "Empresas Monitorando" },
@@ -631,7 +723,6 @@ const Landing = () => {
                 ))}
               </div>
             </div>
-
             {[
               {
                 title: "Produto",
@@ -646,11 +737,11 @@ const Landing = () => {
                 links: ["Privacidade", "LGPD", "Termos", "Cookies", "Compliance"]
               }
             ].map((section) => (
-              <div key={section.title}> {/* Key já existia */}
+              <div key={section.title}>
                 <h4 className="font-semibold mb-6 text-lg">{section.title}</h4>
                 <ul className="space-y-3">
                   {section.links.map((link) => (
-                    <li key={link}> {/* Key já existia */}
+                    <li key={link}>
                       <a
                         href="#"
                         className="text-muted-foreground hover:text-primary transition-colors flex items-center gap-2 group"
@@ -664,7 +755,6 @@ const Landing = () => {
               </div>
             ))}
           </div>
-
           <div className="pt-8 border-t border-border">
             <div className="flex flex-col md:flex-row items-center justify-between gap-4">
               <span className="text-sm text-muted-foreground">
