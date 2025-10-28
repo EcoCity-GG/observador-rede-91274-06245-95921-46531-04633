@@ -26,8 +26,7 @@ import {
   Filter
 } from "lucide-react";
 
-// Importação da imagem PNG
-import empresarioImageUrl from '@/assets/empresario.png';
+
 
 const statsDisplay = [
   { number: "99.9%", label: "Precisão" },
@@ -282,14 +281,14 @@ const Landing = () => {
               <div className="absolute -inset-8 bg-gradient-to-r from-primary/20 to-secondary/20 rounded-3xl blur-3xl animate-pulse" />
 
               {/* Imagem PNG do Empresário */}
-              <img
-                src={empresarioImageUrl}
-                alt="Empresário sorrindo com o dashboard do MonitorPro"
-                className="absolute -top-10 right-0 w-64 h-auto object-contain z-20
-                           lg:w-72 lg:-right-16 lg:-top-16
-                           transform transition-transform duration-300 hover:scale-105"
-                // Ajuste '-top-xx', '-right-xx' e 'w-xx' conforme necessário
-              />
+          <img
+            src="/empresario.png" // <-- Caminho direto a partir da pasta public
+            alt="Empresário sorrindo com o dashboard do MonitorPro"
+            className="absolute -top-10 right-0 w-64 h-auto object-contain z-20
+                       lg:w-72 lg:-right-16 lg:-top-16
+                       transform transition-transform duration-300 hover:scale-105"
+            // Ajuste '-top-xx', '-right-xx' e 'w-xx' conforme necessário
+          />
 
               {/* O Card do Dashboard existente */}
               <div className="relative z-10 bg-card border border-border/50 rounded-2xl p-6 shadow-2xl hover:shadow-primary/10 transition-all duration-500">
