@@ -280,12 +280,9 @@ const Landing = () => {
 
 
               <img
-                src={empresarioImageUrl} // <-- Usa a URL importada do PNG
+                src="/empresario.png" // Caminho direto da pasta public
                 alt="Empresário sorrindo com o dashboard do MonitorPro"
-                className="absolute -top-10 right-0 w-64 h-auto object-contain z-20
-                           lg:w-72 lg:-right-16 lg:-top-16
-                           transform transition-transform duration-300 hover:scale-105"
-                // Ajuste '-top-xx', '-right-xx' e 'w-xx' conforme necessário
+                className="absolute ..." // Mantenha as classes de posicionamento
               />
               {/* ===> FIM DA IMAGEM PNG <=== */}
 
