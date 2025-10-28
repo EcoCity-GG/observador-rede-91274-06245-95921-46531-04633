@@ -15,14 +15,8 @@ const Profile = () => {
   const navigate = useNavigate();
   const { user, refreshUser } = useAuth();
   const [isLoading, setIsLoading] = useState(false);
-  const [isChangingPassword, setIsChangingPassword] = useState(false);
   
   const [fullName, setFullName] = useState("");
-  const [passwords, setPasswords] = useState({
-    currentPassword: "",
-    newPassword: "",
-    confirmPassword: "",
-  });
 
   useEffect(() => {
     if (user) {
@@ -45,36 +39,6 @@ const Profile = () => {
     }
   };
 
-  const handleChangePassword = async (e: React.FormEvent) => {
-    e.preventDefault();
-
-    if (passwords.newPassword !== passwords.confirmPassword) {
-      toast.error("As senhas não coincidem");
-      return;
-    }
-
-    if (passwords.newPassword.length < 6) {
-      toast.error("A senha deve ter pelo menos 6 caracteres");
-      return;
-    }
-
-    setIsChangingPassword(true);
-
-    try {
-      await authService.changePassword(
-        passwords.currentPassword,
-        passwords.newPassword,
-        passwords.confirmPassword
-      );
-      toast.success("Senha alterada com sucesso!");
-      setPasswords({ currentPassword: "", newPassword: "", confirmPassword: "" });
-    } catch (error: any) {
-      toast.error(error.message || "Erro ao alterar senha");
-    } finally {
-      setIsChangingPassword(false);
-    }
-  };
-
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
@@ -90,9 +54,11 @@ const Profile = () => {
               >
                 <ArrowLeft className="w-5 h-5" />
               </Button>
-              <div className="p-2 rounded-lg bg-gradient-to-br from-primary to-secondary border border-primary/20">
-                <Shield className="w-6 h-6 text-white" />
-              </div>
+              <img
+                src="/LOGO.png"
+                alt="NexusCore Security Logo"
+                className="w-10 h-10 rounded-lg shadow-lg"
+              />
               <h1 className="text-2xl font-bold">Meu Perfil</h1>
             </div>
             <div className="flex items-center gap-3">
@@ -171,68 +137,22 @@ const Profile = () => {
           </CardContent>
         </Card>
 
-        {/* Change Password */}
-        <Card className="border-yellow-500/50 hover:shadow-lg transition-shadow duration-300">
+        {/* Password Reset Notice */}
+        <Card className="border-border hover:shadow-lg transition-shadow duration-300">
           <CardHeader>
-            <CardTitle>Alterar Senha</CardTitle>
-            <CardDescription>Atualize sua senha regularmente para maior segurança</CardDescription>
+            <CardTitle>Redefinir Senha</CardTitle>
+            <CardDescription>Para alterar sua senha, use a opção "Esqueceu a senha?" na tela de login</CardDescription>
           </CardHeader>
           <CardContent>
-            <form onSubmit={handleChangePassword} className="space-y-4">
-              <div className="space-y-2">
-                <Label htmlFor="currentPassword">Senha Atual</Label>
-                <Input
-                  id="currentPassword"
-                  type="password"
-                  placeholder="••••••••"
-                  value={passwords.currentPassword}
-                  onChange={(e) => setPasswords({ ...passwords, currentPassword: e.target.value })}
-                  required
-                  disabled={isChangingPassword}
-                />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="newPassword">Nova Senha</Label>
-                <Input
-                  id="newPassword"
-                  type="password"
-                  placeholder="••••••••"
-                  value={passwords.newPassword}
-                  onChange={(e) => setPasswords({ ...passwords, newPassword: e.target.value })}
-                  required
-                  disabled={isChangingPassword}
-                  minLength={6}
-                />
-                <p className="text-xs text-muted-foreground">Mínimo 6 caracteres</p>
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="confirmPassword">Confirmar Nova Senha</Label>
-                <Input
-                  id="confirmPassword"
-                  type="password"
-                  placeholder="••••••••"
-                  value={passwords.confirmPassword}
-                  onChange={(e) => setPasswords({ ...passwords, confirmPassword: e.target.value })}
-                  required
-                  disabled={isChangingPassword}
-                  minLength={6}
-                />
-              </div>
-              <Button 
-                type="submit" 
-                variant="warning"
-                disabled={isChangingPassword}
-              >
-                {isChangingPassword ? (
-                  <>
-                    <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                    Alterando...
-                  </>
-                ) : (
-                  "Alterar Senha"
-                )}
-              </Button>
-            </form>
+            <p className="text-sm text-muted-foreground mb-4">
+              Por segurança, a redefinição de senha é feita exclusivamente através do Firebase Authentication.
+            </p>
+            <Button 
+              variant="outline"
+              onClick={() => navigate("/login")}
+            >
+              Ir para o Login
+            </Button>
           </CardContent>
         </Card>
       </main>

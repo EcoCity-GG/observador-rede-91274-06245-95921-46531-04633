@@ -92,9 +92,11 @@ const Management = () => {
               >
                 <ArrowLeft className="w-5 h-5" />
               </Button>
-              <div className="p-2 rounded-lg bg-gradient-to-br from-primary to-secondary border border-primary/20 hover:scale-110 transition-transform duration-300 cursor-pointer">
-                <Shield className="w-6 h-6 text-white" />
-              </div>
+              <img
+                src="/LOGO.png"
+                alt="NexusCore Security Logo"
+                className="w-10 h-10 rounded-lg shadow-lg hover:scale-110 transition-transform duration-300 cursor-pointer"
+              />
               <div>
                 <h1 className="text-xl font-bold hover:text-primary transition-colors">NexusCore Security</h1>
                 <p className="text-xs text-muted-foreground -mt-1">Gerenciamento</p>

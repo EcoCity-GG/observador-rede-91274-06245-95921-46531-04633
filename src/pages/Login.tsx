@@ -112,9 +112,11 @@ const Login = () => {
       <Card className="w-full max-w-md border-border shadow-2xl">
         <CardHeader className="text-center">
           <div className="flex justify-center mb-4">
-            <div className="w-16 h-16 bg-gradient-to-br from-primary to-secondary rounded-xl flex items-center justify-center shadow-lg">
-              <Shield className="w-8 h-8 text-white" />
-            </div>
+            <img
+              src="/LOGO.png"
+              alt="NexusCore Security Logo"
+              className="w-20 h-20 rounded-xl shadow-lg"
+            />
           </div>
           <CardTitle className="text-2xl">
             {isLogin ? t('login.title') : t('login.createAccountTitle')}

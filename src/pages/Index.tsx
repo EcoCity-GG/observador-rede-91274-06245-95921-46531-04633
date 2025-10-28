@@ -43,9 +43,11 @@ const Index = () => {
           <div className="container mx-auto px-6 py-4">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3 cursor-pointer" onClick={() => navigate("/")}>
-                <div className="p-2 rounded-lg bg-gradient-to-br from-primary to-secondary border border-primary/20 hover:scale-110 transition-transform duration-300">
-                  <Shield className="w-6 h-6 text-white" />
-                </div>
+                <img
+                  src="/LOGO.png"
+                  alt="NexusCore Security Logo"
+                  className="w-10 h-10 rounded-lg shadow-lg hover:scale-110 transition-transform duration-300"
+                />
                 <div>
                   <h1 className="text-xl font-bold hover:text-primary transition-colors">NexusCore Security</h1>
                   <p className="text-xs text-muted-foreground -mt-1">Real-time Protection</p>
@@ -63,7 +65,7 @@ const Index = () => {
                   Perfil
                 </Button>
                 <Button 
-                  onClick={() => navigate("/management")} 
+                  onClick={() => navigate("/gerenciamento")} 
                   variant="outline" 
                   className="gap-2 hover:bg-primary hover:text-white hover:border-primary transition-all duration-300"
                 >

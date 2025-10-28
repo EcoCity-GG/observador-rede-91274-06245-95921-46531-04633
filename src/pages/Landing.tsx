@@ -172,15 +172,15 @@ const Landing = () => {
             <div className="flex items-center gap-12">
               <div className="flex items-center gap-3 group cursor-pointer" onClick={() => navigate("/")}>
                 <img
-                  src="https://i.ibb.co/gF7msvyr/LOGO-PERFIL-1.png"
-                  alt="MonitorPro Logo"
+                  src="/LOGO.png"
+                  alt="NexusCore Security Logo"
                   className="w-12 h-12 rounded-xl shadow-lg hover:shadow-xl hover:scale-110 transition-all duration-300"
                 />
                 <div className="flex flex-col">
                   <span className="font-bold text-xl bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-                    MonitorPro
+                    NexusCore Security
                   </span>
-                  <span className="text-xs text-muted-foreground -mt-1">Web Access Monitor</span>
+                  <span className="text-xs text-muted-foreground -mt-1">Real-time Protection</span>
                 </div>
               </div>
 
@@ -280,14 +280,13 @@ const Landing = () => {
 <div className={`relative transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
               <div className="absolute -inset-8 bg-gradient-to-r from-primary/20 to-secondary/20 rounded-3xl blur-3xl animate-pulse" />
 
-              {/* Imagem PNG do Empresário (AINDA MAIOR) */}
+              {/* Imagem PNG do Empresário (AUMENTADA) */}
               <img
-                src="/empresario.png" // Caminho da pasta public
-                alt="Empresário sorrindo com o dashboard do MonitorPro"
-                className="absolute top-24 -right-52 w-[900px] h-auto object-contain z-20 // Tamanho base aumentado
-                           lg:w-[1200px] lg:-right-80 lg:top-16 // Tamanho LG aumentado
+                src="/empresario.png"
+                alt="Empresário sorrindo com o dashboard do NexusCore Security"
+                className="absolute top-16 -right-60 w-[1000px] h-auto object-contain z-20
+                           lg:w-[1400px] lg:-right-96 lg:top-8
                            transform transition-transform duration-300 hover:scale-105"
-                // ^^^^^^^^^^ VALORES AUMENTADOS NOVAMENTE ^^^^^^^^^^
               />
 
               {/* O Card do Dashboard existente */}
