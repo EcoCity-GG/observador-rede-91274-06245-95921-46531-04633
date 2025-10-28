@@ -2,7 +2,6 @@ import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { LanguageSelector } from "@/components/LanguageSelector";
-import empresarioImageUrl from '@/assets/empresario.png';
 import { CookieBanner } from "@/components/CookieBanner";
 import { useEffect, useState } from "react";
 import { useDashboardData } from "@/hooks/useDashboardData"; //
@@ -279,12 +278,46 @@ useEffect(() => {
             <div className={`relative transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
               <div className="absolute -inset-8 bg-gradient-to-r from-primary/20 to-secondary/20 rounded-3xl blur-3xl animate-pulse" /> {/* */}
 
-
-              <img
-                src="/assets/empresario.png" // Caminho direto da pasta public
-                alt="Empresário sorrindo com o dashboard do MonitorPro"
-                className="absolute ..." // Mantenha as classes de posicionamento
-              />
+{/* ===> CANVA EMBED ADICIONADO AQUI <=== */}
+              <div
+                // Aplicando classes de posicionamento e tamanho ao container do iframe
+                className="absolute -top-10 right-0 w-64 lg:w-72 lg:-right-16 lg:-top-16 z-20 
+                           transform transition-transform duration-300 hover:scale-105"
+                // Mantendo estilos inline essenciais para proporção e layout do iframe
+                style={{
+                  position: 'absolute', // Redundante com className="absolute", mas seguro manter
+                  width: '18rem', // Equivalente a w-72 (ajuste se necessário)
+                  // height: 0, // Controlado pelo padding-top
+                  paddingTop: '56.2225%', // Mantém a proporção 16:9 (ajuste se seu design for diferente)
+                  paddingBottom: 0,
+                  boxShadow: '0 2px 8px 0 rgba(63,69,81,0.16)',
+                  // marginTop: '1.6em', // Removido, usamos classes top/right
+                  // marginBottom: '0.9em', // Removido
+                  overflow: 'hidden',
+                  borderRadius: '8px',
+                  willChange: 'transform',
+                }}
+              >
+                <iframe
+                  loading="lazy"
+                  style={{
+                    position: 'absolute',
+                    width: '100%',
+                    height: '100%',
+                    top: 0,
+                    left: 0,
+                    border: 'none',
+                    padding: 0,
+                    margin: 0,
+                  }}
+                  src="https://www.canva.com/design/DAG3CCCRjT8/qQcA0te2RfCmFj9Ov4y3ZA/view?embed"
+                  allowFullScreen={true} // Em React, usamos camelCase e booleanos
+                  allow="fullscreen"
+                  title="Design do Canva Incorporado" // Adicionar um title por acessibilidade
+                >
+                </iframe>
+              </div>
+              {/* ===> FIM DO CANVA EMBED <=== */}
               {/* ===> FIM DA IMAGEM PNG <=== */}
 
               <div className="relative z-10 bg-card border border-border/50 rounded-2xl p-6 shadow-2xl hover:shadow-primary/10 transition-all duration-500"> {/* Adicionado z-10 */}
