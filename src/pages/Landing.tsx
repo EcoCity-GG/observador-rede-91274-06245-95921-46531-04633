@@ -280,15 +280,15 @@ const Landing = () => {
           <div className={`relative transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
               <div className="absolute -inset-8 bg-gradient-to-r from-primary/20 to-secondary/20 rounded-3xl blur-3xl animate-pulse" />
 
-              {/* Imagem PNG do Empresário (BEM MAIOR, POSIÇÃO VERTICAL OK, GRADIENTE INFERIOR) */}
+              {/* Imagem PNG do Empresário (BEM MAIOR, GRADIENTE CURTO E SUAVE DE BAIXO) */}
               <img
                 src="/empresario.png" // Caminho da pasta public
                 alt="Empresário sorrindo com o dashboard do MonitorPro"
-                className="absolute top-24 -right-32 w-[700px] h-auto object-contain z-20
-                           lg:w-[900px] lg:-right-52 lg:top-16
+                className="absolute top-24 -right-40 w-[800px] h-auto object-contain z-20
+                           lg:w-[1000px] lg:-right-64 lg:top-16
                            transform transition-transform duration-300 hover:scale-105
-                           [mask-image:linear-gradient(to_top,black_75%,transparent_5%)]" // <-- GRADIENTE DE BAIXO
-                // ^^^^^^^^^^ NOVOS VALORES E GRADIENTE DE BAIXO ^^^^^^^^^^
+                           [mask-image:linear-gradient(to_top,black_30%,transparent_0%)]" // <-- GRADIENTE CURTO E SUAVE
+                // ^^^^^^^^^^ NOVOS VALORES E GRADIENTE AJUSTADO ^^^^^^^^^^
               />
 
               {/* O Card do Dashboard existente */}
