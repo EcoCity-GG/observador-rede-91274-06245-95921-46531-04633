@@ -280,14 +280,14 @@ const Landing = () => {
             <div className={`relative transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
               <div className="absolute -inset-8 bg-gradient-to-r from-primary/20 to-secondary/20 rounded-3xl blur-3xl animate-pulse" />
 
-              {/* Imagem PNG do Empresário (MAIOR E MAIS BAIXO) */}
+              {/* Imagem PNG do Empresário (BEM MAIOR E BEM MAIS BAIXO) */}
               <img
                 src="/empresario.png" // Caminho da pasta public
                 alt="Empresário sorrindo com o dashboard do MonitorPro"
-                className="absolute top-10 -right-10 w-[350px] h-auto object-contain z-20
-                           lg:w-[550px] lg:-right-20 lg:top-0
+                className="absolute top-24 -right-16 w-[500px] h-auto object-contain z-20
+                           lg:w-[700px] lg:-right-32 lg:top-16
                            transform transition-transform duration-300 hover:scale-105"
-                // ^^^^^^^^^^ NOVOS VALORES AQUI ^^^^^^^^^^
+                // ^^^^^^^^^^ NOVOS VALORES MAIORES AQUI ^^^^^^^^^^
                 // Ajuste 'top-X', '-right-Y', 'w-[Zpx]' conforme necessário
               />
 
