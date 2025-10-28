@@ -277,18 +277,24 @@ const Landing = () => {
             </div>
 
             {/* Right Column: Dashboard Mockup + Image */}
-            <div className={`relative transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+          <div className={`relative transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
               <div className="absolute -inset-8 bg-gradient-to-r from-primary/20 to-secondary/20 rounded-3xl blur-3xl animate-pulse" />
 
-              {/* Imagem PNG do Empresário */}
-          <img
-            src="/empresario.png" // <-- Caminho direto a partir da pasta public
-            alt="Empresário sorrindo com o dashboard do MonitorPro"
-            className="absolute -top-10 right-0 w-64 h-auto object-contain z-20
-                       lg:w-72 lg:-right-16 lg:-top-16
-                       transform transition-transform duration-300 hover:scale-105"
-            // Ajuste '-top-xx', '-right-xx' e 'w-xx' conforme necessário
-          />
+              {/* Imagem PNG do Empresário (AGORA MAIOR E POSICIONADO) */}
+              <img
+                src="/empresario.png" // Caminho direto da pasta public
+                alt="Empresário sorrindo com o dashboard do MonitorPro"
+                className="absolute -top-24 right-0 w-96 h-auto object-contain z-20
+                           lg:w-[480px] lg:-right-24 lg:-top-32
+                           transform transition-transform duration-300 hover:scale-105"
+                // ^^^^^^^^^^ ALTERADO AQUI ^^^^^^^^^^
+              />
+
+              {/* O Card do Dashboard existente */}
+              <div className="relative z-10 bg-card border border-border/50 rounded-2xl p-6 shadow-2xl hover:shadow-primary/10 transition-all duration-500">
+                {/* ... (restante do conteúdo do card) ... */}
+              </div>
+            </div>
 
               {/* O Card do Dashboard existente */}
               <div className="relative z-10 bg-card border border-border/50 rounded-2xl p-6 shadow-2xl hover:shadow-primary/10 transition-all duration-500">
