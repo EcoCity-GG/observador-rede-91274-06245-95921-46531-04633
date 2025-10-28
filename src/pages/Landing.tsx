@@ -1,7 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import { ThemeToggle } from "@/components/ThemeToggle";
-import empresarioImageUrl from '@/assets/empresario.png';
 import { LanguageSelector } from "@/components/LanguageSelector";
 import { CookieBanner } from "@/components/CookieBanner";
 import { useEffect, useState } from "react";
