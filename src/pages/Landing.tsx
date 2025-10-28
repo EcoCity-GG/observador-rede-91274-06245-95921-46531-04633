@@ -281,7 +281,7 @@ useEffect(() => {
 
 
               <img
-                src="/empresario.png" // Caminho direto da pasta public
+                src="/assets/empresario.png" // Caminho direto da pasta public
                 alt="Empresário sorrindo com o dashboard do MonitorPro"
                 className="absolute ..." // Mantenha as classes de posicionamento
               />
