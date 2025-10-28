@@ -40,30 +40,31 @@ const Landing = () => {
   const { data } = useDashboardData(); //
   const stats = data ? { totalUsers: data.summary.length, totalAlerts: 0, aiDetections: 0 } : null; //
 
-  useEffect(() => {
-    setIsVisible(true);
+// src/pages/Landing.tsx
+useEffect(() => {
+  setIsVisible(true);
 
-    const script = document.createElement("script");
-    script.src = "https://vlibras.gov.br/app/vlibras-plugin.js"; //
-    script.async = true;
-    document.body.appendChild(script);
+  // const script = document.createElement("script");
+  // script.src = "https://vlibras.gov.br/app/vlibras-plugin.js";
+  // script.async = true;
+  // document.body.appendChild(script);
 
-    script.onload = () => {
-      // @ts-ignore
-      new window.VLibras.Widget("https://vlibras.gov.br/app"); //
-    };
+  // script.onload = () => {
+  //   // @ts-ignore
+  //   new window.VLibras.Widget("https://vlibras.gov.br/app");
+  // };
 
-    const interval = setInterval(() => {
-      setActiveFeature((prev) => (prev + 1) % 5); // Atualizado para 5 features
-    }, 5000); //
+  const interval = setInterval(() => {
+    setActiveFeature((prev) => (prev + 1) % 5); // Atualizado para 5 features
+  }, 5000);
 
-    return () => {
-      if (script.parentNode) {
-        document.body.removeChild(script);
-      }
-      clearInterval(interval);
-    };
-  }, []); //
+  return () => {
+    // if (script.parentNode) {
+    //   document.body.removeChild(script);
+    // }
+    clearInterval(interval);
+  };
+}, []);
 
   const features = [
     {
