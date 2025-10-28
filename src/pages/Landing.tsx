@@ -284,8 +284,8 @@ const Landing = () => {
               <img
                 src="/empresario.png" // Caminho da pasta public
                 alt="Empresário sorrindo com o dashboard do MonitorPro"
-                className="absolute top-24 right-32 w-[1200px] h-auto object-contain z-20 // Tamanho base BEM MAIOR, right positivo
-                           lg:w-[2000px] lg:right-64 lg:top-16 // Tamanho LG BEM MAIOR, right positivo
+                className="absolute top-12 right-32 w-[1200px] h-auto object-contain z-20 // Tamanho base BEM MAIOR, right positivo
+                           lg:w-[2000px] lg:right-64 lg:top-8 // Tamanho LG BEM MAIOR, right positivo
                            transform transition-transform duration-300 hover:scale-105"
                 // ^^^^^^^^^^ VALORES AUMENTADOS E MOVIDOS MAIS À ESQUERDA ^^^^^^^^^^
               />
