@@ -4,7 +4,6 @@ import { ThemeToggle } from "@/components/ThemeToggle";
 import { LanguageSelector } from "@/components/LanguageSelector";
 import { CookieBanner } from "@/components/CookieBanner";
 import { useEffect, useState } from "react";
-import EmpresarioSvg from '@/assets/empresario.svg?react';
 import { useDashboardData } from "@/hooks/useDashboardData"; //
 import {
   Shield,
@@ -278,16 +277,16 @@ const Landing = () => {
             <div className={`relative transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
               <div className="absolute -inset-8 bg-gradient-to-r from-primary/20 to-secondary/20 rounded-3xl blur-3xl animate-pulse" /> {/* */}
 
-              {/* ===> IMAGEM DO EMPRESÁRIO ADICIONADA AQUI <=== */}
-            <EmpresarioSvg
-                      aria-label="Empresário sorrindo com o dashboard do MonitorPro" // Melhor usar aria-label para SVGs decorativos
-                      className="absolute -top-10 right-0 w-64 h-auto z-20 
-                                 lg:w-72 lg:-right-16 lg:-top-16 
-                                 transform transition-transform duration-300 hover:scale-105
-                                 text-gray-500" // Exemplo: cor de preenchimento padrão via Tailwind
-                      // Ajuste as classes de posicionamento, tamanho e *cor* (fill/stroke) conforme necessário
-                    /> 
-              {/* ===> FIM DA IMAGEM DO EMPRESÁRIO <=== */}
+
+              <img
+                src={empresarioImageUrl} // <-- Usa a URL importada do PNG
+                alt="Empresário sorrindo com o dashboard do MonitorPro"
+                className="absolute -top-10 right-0 w-64 h-auto object-contain z-20
+                           lg:w-72 lg:-right-16 lg:-top-16
+                           transform transition-transform duration-300 hover:scale-105"
+                // Ajuste '-top-xx', '-right-xx' e 'w-xx' conforme necessário
+              />
+              {/* ===> FIM DA IMAGEM PNG <=== */}
 
               <div className="relative z-10 bg-card border border-border/50 rounded-2xl p-6 shadow-2xl hover:shadow-primary/10 transition-all duration-500"> {/* Adicionado z-10 */}
                 {/* ... (código do card do dashboard permanece o mesmo) ... */}
