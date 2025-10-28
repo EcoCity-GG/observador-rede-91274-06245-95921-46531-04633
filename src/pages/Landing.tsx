@@ -4,7 +4,7 @@ import { ThemeToggle } from "@/components/ThemeToggle";
 import { LanguageSelector } from "@/components/LanguageSelector";
 import { CookieBanner } from "@/components/CookieBanner";
 import { useEffect, useState } from "react";
-import { useDashboardData } from "@/hooks/useDashboardData"; //
+import { useDashboardData } from "@/hooks/useDashboardData";
 import {
   Shield,
   Eye,
@@ -26,7 +26,7 @@ import {
   Filter
 } from "lucide-react";
 
-
+// (Não precisamos mais importar a imagem do empresário se ela estiver na pasta /public)
 
 const statsDisplay = [
   { number: "99.9%", label: "Precisão" },
@@ -42,11 +42,9 @@ const Landing = () => {
   const { data } = useDashboardData();
   const stats = data ? { totalUsers: data.summary.length, totalAlerts: 0, aiDetections: 0 } : null;
 
-  // src/pages/Landing.tsx
   useEffect(() => {
     setIsVisible(true);
 
-    // Vlibras (código comentado conforme sua versão)
     // const script = document.createElement("script");
     // script.src = "https://vlibras.gov.br/app/vlibras-plugin.js";
     // script.async = true;
@@ -58,7 +56,7 @@ const Landing = () => {
     // };
 
     const interval = setInterval(() => {
-      setActiveFeature((prev) => (prev + 1) % 5); // Atualizado para 5 features
+      setActiveFeature((prev) => (prev + 1) % 5); 
     }, 5000);
 
     return () => {
@@ -148,8 +146,8 @@ const Landing = () => {
   ];
 
   return (
+    // Div principal - removido overflow-hidden
     <div className="min-h-screen bg-background">
-      {/* Vlibras Widget Placeholder */}
       <div data-vw="true" className="enabled">
         <div data-vw-access-button="true" className="active"></div>
         <div data-vw-plugin-wrapper="true">
@@ -159,35 +157,44 @@ const Landing = () => {
 
       {/* Background Effects */}
       <div className="fixed inset-0 -z-10">
-        <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-primary/5" />
+      
+        {/* ===> GRADIENTE ANIMADO APLICADO AQUI <=== */}
+        <div className="absolute inset-0 bg-gradient-to-r from-primary/10 via-secondary/10 to-blue-500/10 
+                        bg-400% animate-background-pan opacity-30 dark:opacity-20" /> 
+        {/* - Mudamos as cores para usar as cores do tema (primary, secondary)
+          - Adicionamos bg-400% (definido no tailwind.config.ts)
+          - Adicionamos animate-background-pan (definido no tailwind.config.ts)
+          - Ajustamos a opacidade para ser sutil
+        */}
+
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl animate-pulse" />
         <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-secondary/10 rounded-full blur-3xl animate-pulse delay-1000" />
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#8882_1px,transparent_1px),linear-gradient(to_bottom,#8882_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,#000_70%,transparent_110%)]" />
       </div>
 
-      {/* Navigation */}
+      {/* Navigation (Tem seu próprio fundo, cobrindo o gradiente) */}
       <nav className="bg-background/80 backdrop-blur-xl border-b border-border/50 sticky top-0 z-50">
-         <div className="container mx-auto px-6 py-4">
+        <div className="container mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-12">
               <div className="flex items-center gap-3 group cursor-pointer" onClick={() => navigate("/")}>
                 <img
-                  src="/LOGO.png"
-                  alt="NexusCore Security Logo"
+                  src="https://i.ibb.co/gF7msvyr/LOGO-PERFIL-1.png"
+                  alt="MonitorPro Logo"
                   className="w-12 h-12 rounded-xl shadow-lg hover:shadow-xl hover:scale-110 transition-all duration-300"
                 />
                 <div className="flex flex-col">
                   <span className="font-bold text-xl bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-                    NexusCore Security
+                    MonitorPro
                   </span>
-                  <span className="text-xs text-muted-foreground -mt-1">Real-time Protection</span>
+                  <span className="text-xs text-muted-foreground -mt-1">Web Access Monitor</span>
                 </div>
               </div>
 
               <div className="hidden lg:flex items-center gap-8">
                 {["Home", "Recursos", "Dashboard", "Preços", "Contato"].map((item) => (
                   <a
-                    key={item} // Key adicionada
+                    key={item}
                     href={`#${item.toLowerCase()}`}
                     className="text-foreground/80 hover:text-primary transition-all duration-300 font-medium relative group"
                   >
@@ -214,7 +221,7 @@ const Landing = () => {
         </div>
       </nav>
 
-      {/* Hero Section */}
+      {/* Hero Section (Fundo transparente, mostra o gradiente animado) */}
       <section id="home" className="relative pt-20 pb-32">
         <div className="container mx-auto px-6">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
@@ -263,7 +270,7 @@ const Landing = () => {
               <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 pt-8">
                 {statsDisplay.map((stat, index) => (
                   <div
-                    key={stat.label || index} // Key adicionada
+                    key={stat.label || index}
                     className="text-center group cursor-pointer"
                     style={{ animationDelay: `${index * 100}ms` }}
                   >
@@ -277,17 +284,17 @@ const Landing = () => {
             </div>
 
             {/* Right Column: Dashboard Mockup + Image */}
-<div className={`relative transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+            <div className={`relative transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
               <div className="absolute -inset-8 bg-gradient-to-r from-primary/20 to-secondary/20 rounded-3xl blur-3xl animate-pulse" />
 
-              {/* Imagem PNG do Empresário (MAIOR E MAIS À ESQUERDA) */}
+              {/* Imagem PNG do Empresário */}
               <img
                 src="/empresario.png" // Caminho da pasta public
                 alt="Empresário sorrindo com o dashboard do MonitorPro"
-                className="absolute top-34 right-32 w-[1200px] h-auto object-contain z-20 // Tamanho base BEM MAIOR, right positivo
-                           lg:w-[2000px] lg:right-64 lg:top-24 // Tamanho LG BEM MAIOR, right positivo
-                           transform transition-transform duration-300 hover:scale-105"
-                // ^^^^^^^^^^ VALORES AUMENTADOS E MOVIDOS MAIS À ESQUERDA ^^^^^^^^^^
+                className="absolute top-24 right-32 w-[1100px] h-auto object-contain z-20
+                           lg:w-[1400px] lg:right-64 lg:top-16
+                           transform transition-transform duration-300 hover:scale-105
+                           [mask-image:linear-gradient(to_top,black_25%,transparent_0%)]"
               />
 
               {/* O Card do Dashboard existente */}
@@ -340,7 +347,7 @@ const Landing = () => {
                         { site: "linkedin.com", status: "Permitido", color: "green" }
                       ].map((item, index) => (
                         <div
-                          key={item.site} // Key adicionada
+                          key={item.site}
                           className="flex justify-between text-xs p-2 rounded bg-muted/50 hover:bg-muted transition-colors"
                           style={{ animationDelay: `${index * 100}ms` }}
                         >
@@ -363,8 +370,10 @@ const Landing = () => {
       </section>
 
       {/* Features Section */}
-      <section id="recursos" className="py-32 bg-muted/30 relative">
-        <div className="absolute inset-0 bg-gradient-to-b from-background via-transparent to-background pointer-events-none" />
+      {/* ===> CLASSE bg-muted/30 REMOVIDA DAQUI <=== */}
+      <section id="recursos" className="py-32 relative">
+        {/* <div className="absolute inset-0 bg-gradient-to-b from-background via-transparent to-background pointer-events-none" /> */}
+        
         <div className="container mx-auto px-6 relative z-10">
           <div className="text-center mb-20">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-medium mb-6">
@@ -378,14 +387,15 @@ const Landing = () => {
               Controle completo sobre acessos web com tecnologia avançada para detectar sites indevidos e garantir produtividade
             </p>
           </div>
-
+          
           <div className="space-y-32 max-w-7xl mx-auto">
             {features.map((feature, index) => {
               const isEven = index % 2 === 0;
               const FeatureIcon = feature.icon;
+              
               return (
-                <div
-                  key={feature.title || index} // Key adicionada
+                <div 
+                  key={feature.title}
                   className={`grid lg:grid-cols-2 gap-12 items-center`}
                 >
                   <div className={`space-y-6 ${!isEven ? 'lg:order-2' : ''}`}>
@@ -394,6 +404,7 @@ const Landing = () => {
                         <FeatureIcon className="w-8 h-8 text-white relative z-10" />
                         <div className={`absolute inset-0 bg-gradient-to-br ${feature.gradient} rounded-2xl blur opacity-50 group-hover:opacity-75 transition-opacity`} />
                       </div>
+                      
                       <div>
                         <h3 className="text-4xl font-bold mb-4 bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent">
                           {feature.title}
@@ -403,10 +414,11 @@ const Landing = () => {
                         </p>
                       </div>
                     </div>
+
                     <div className="space-y-3">
                       {feature.details.map((detail, idx) => (
-                        <div
-                          key={idx} // Key adicionada
+                        <div 
+                          key={idx}
                           className="flex items-start gap-3 group"
                           style={{ animationDelay: `${idx * 100}ms` }}
                         >
@@ -419,6 +431,7 @@ const Landing = () => {
                         </div>
                       ))}
                     </div>
+
                     <div className={`inline-flex items-center gap-4 px-6 py-4 rounded-2xl bg-gradient-to-br ${feature.bgGradient} border border-border/50`}>
                       <div>
                         <div className={`text-3xl font-bold bg-gradient-to-r ${feature.gradient} bg-clip-text text-transparent`}>
@@ -429,12 +442,14 @@ const Landing = () => {
                       <TrendingUp className="w-6 h-6 text-green-500" />
                     </div>
                   </div>
+
                   <div className={`relative ${!isEven ? 'lg:order-1' : ''}`}>
                     <div className={`absolute -inset-4 bg-gradient-to-br ${feature.gradient} opacity-20 rounded-3xl blur-2xl`} />
                     <div className="relative bg-card border border-border/50 rounded-3xl p-8 shadow-2xl hover:shadow-primary/10 transition-all duration-500 overflow-hidden group">
                       <div className="absolute inset-0 opacity-5">
                         <div className="absolute inset-0 bg-[linear-gradient(to_right,#8882_1px,transparent_1px),linear-gradient(to_bottom,#8882_1px,transparent_1px)] bg-[size:2rem_2rem]" />
                       </div>
+
                       <div className="relative z-10 space-y-6">
                         <div className="flex items-center justify-between">
                           <div className="flex items-center gap-3">
@@ -448,7 +463,6 @@ const Landing = () => {
                           </div>
                         </div>
 
-                        {/* Mocks condicionais (como no código original) */}
                         {index === 0 && (
                           <div className="space-y-4">
                             <div className="grid grid-cols-3 gap-3">
@@ -467,15 +481,16 @@ const Landing = () => {
                             </div>
                           </div>
                         )}
+
                         {index === 1 && (
-                           <div className="space-y-3">
+                          <div className="space-y-3">
                             {[
                               { label: "Redes Sociais Bloqueadas", severity: "high", time: "Agora" },
                               { label: "Site de Jogos Detectado", severity: "medium", time: "2 min atrás" },
                               { label: "Conteúdo Impróprio", severity: "high", time: "5 min atrás" }
                             ].map((alert, i) => (
-                              <div
-                                key={i} // Key adicionada
+                              <div 
+                                key={i}
                                 className="flex items-center gap-3 p-4 bg-muted/50 rounded-xl border border-border/50 hover:bg-muted transition-colors"
                                 style={{ animationDelay: `${i * 150}ms` }}
                               >
@@ -489,7 +504,8 @@ const Landing = () => {
                             ))}
                           </div>
                         )}
-                         {index === 2 && (
+
+                        {index === 2 && (
                           <div className="space-y-4">
                             <div className="grid grid-cols-2 gap-3">
                               {[
@@ -508,15 +524,16 @@ const Landing = () => {
                             </div>
                           </div>
                         )}
+
                         {index === 3 && (
-                           <div className="space-y-3">
+                          <div className="space-y-3">
                             {[
                               { name: "Marketing", sites: 234 },
                               { name: "Desenvolvimento", sites: 189 },
                               { name: "Administrativo", sites: 156 }
                             ].map((teamData, i) => (
-                              <div
-                                key={i} // Key adicionada
+                              <div 
+                                key={i}
                                 className="flex items-center gap-3 p-4 bg-muted/50 rounded-xl border border-border/50 hover:bg-muted transition-colors"
                                 style={{ animationDelay: `${i * 150}ms` }}
                               >
@@ -530,12 +547,13 @@ const Landing = () => {
                             ))}
                           </div>
                         )}
+
                         {index === 4 && (
-                           <div className="space-y-4">
+                          <div className="space-y-4">
                             <div className="grid grid-cols-2 gap-3">
                               {["PDF", "Excel", "CSV", "JSON"].map((format, i) => (
-                                <div
-                                  key={i} // Key adicionada
+                                <div 
+                                  key={i}
                                   className="p-3 bg-gradient-to-br from-muted to-muted/50 rounded-xl border border-border/50 text-center hover:scale-105 transition-transform cursor-pointer"
                                 >
                                   <FileText className="w-5 h-5 text-primary mx-auto mb-2" />
@@ -579,8 +597,10 @@ const Landing = () => {
       </section>
 
       {/* How It Works Section */}
-      <section className="py-32 bg-background relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-muted/30 via-transparent to-muted/30" />
+      {/* ===> CLASSE bg-background E bg-gradient-to-b REMOVIDAS DAQUI <=== */}
+      <section className="py-32 relative overflow-hidden">
+        {/* <div className="absolute inset-0 bg-gradient-to-b from-muted/30 via-transparent to-muted/30" /> */}
+        
         <div className="container mx-auto px-6 relative z-10">
           <div className="text-center mb-16">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-medium mb-6">
@@ -594,6 +614,7 @@ const Landing = () => {
               Sistema inteligente que rastreia e analisa todos os acessos web em tempo real
             </p>
           </div>
+
           <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
             {[
               {
@@ -616,7 +637,7 @@ const Landing = () => {
               }
             ].map((tech, index) => (
               <div
-                key={tech.title || index} // Key adicionada
+                key={tech.title || index}
                 className="relative group"
                 style={{ animationDelay: `${index * 100}ms` }}
               >
@@ -634,32 +655,36 @@ const Landing = () => {
         </div>
       </section>
 
-      {/* Call to Action Section */}
+      {/* Call to Action Section (Já cobre o fundo animado, como solicitado) */}
       <section className="py-32 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-primary to-secondary" />
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#fff2_1px,transparent_1px),linear-gradient(to_bottom,#fff2_1px,transparent_1px)] bg-[size:4rem_4rem]" />
+        
         <div className="container mx-auto px-6 text-center relative z-10">
           <div className="max-w-4xl mx-auto space-y-8">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/20 text-white text-sm font-medium mb-4">
               <Sparkles className="w-4 h-4" />
               Comece Hoje Mesmo
             </div>
+            
             <h2 className="text-5xl lg:text-6xl font-bold text-white leading-tight">
               Pronto para Monitorar<br />Acessos Web com Inteligência?
             </h2>
+            
             <p className="text-xl text-white/90 max-w-2xl mx-auto leading-relaxed">
               Junte-se a centenas de empresas e escolas que já protegem sua produtividade monitorando sites indevidos
             </p>
+            
             <div className="flex flex-col sm:flex-row gap-4 justify-center pt-8">
-              <Button
+              <Button 
                 onClick={() => navigate("/dashboard")}
                 className="bg-white text-primary hover:bg-white/90 rounded-xl px-8 py-6 text-lg shadow-2xl hover:shadow-white/20 hover:scale-105 transition-all duration-300 group"
                 size="lg"
               >
                 <Zap className="w-5 h-5 mr-2 group-hover:rotate-12 transition-transform" />
                 Começar Monitoramento
-              </Button>
-              <Button
+              </Click>
+              <Button 
                 variant="outline"
                 className="border-2 border-white text-white hover:bg-white/10 rounded-xl px-8 py-6 text-lg hover:scale-105 transition-all duration-300"
                 size="lg"
@@ -668,6 +693,7 @@ const Landing = () => {
                 Ver Planos
               </Button>
             </div>
+
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8 pt-16">
               {[
                 { number: "500+", label: "Empresas Monitorando" },
@@ -675,8 +701,8 @@ const Landing = () => {
                 { number: "99.9%", label: "Taxa de Detecção" },
                 { number: "24/7", label: "Monitoramento Ativo" }
               ].map((stat, index) => (
-                <div
-                  key={stat.label || index} // Key adicionada
+                <div 
+                  key={stat.label || index}
                   className="text-center"
                   style={{ animationDelay: `${index * 100}ms` }}
                 >
@@ -689,7 +715,7 @@ const Landing = () => {
         </div>
       </section>
 
-      {/* Footer */}
+      {/* Footer (Tem seu próprio fundo, cobrindo o gradiente) */}
       <footer className="bg-card border-t border-border py-20">
         <div className="container mx-auto px-6">
           <div className="grid md:grid-cols-4 gap-12 mb-12">
@@ -713,8 +739,8 @@ const Landing = () => {
               </p>
               <div className="flex gap-4">
                 {[Globe, Shield, Lock].map((Icon, index) => (
-                  <div
-                    key={index} // Key adicionada
+                  <div 
+                    key={index}
                     className="w-10 h-10 bg-muted hover:bg-primary/10 rounded-lg flex items-center justify-center cursor-pointer transition-all duration-300 hover:scale-110 group"
                   >
                     <Icon className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
@@ -722,6 +748,7 @@ const Landing = () => {
                 ))}
               </div>
             </div>
+            
             {[
               {
                 title: "Produto",
@@ -741,8 +768,8 @@ const Landing = () => {
                 <ul className="space-y-3">
                   {section.links.map((link) => (
                     <li key={link}>
-                      <a
-                        href="#"
+                      <a 
+                        href="#" 
                         className="text-muted-foreground hover:text-primary transition-colors flex items-center gap-2 group"
                       >
                         <ArrowRight className="w-3 h-3 opacity-0 group-hover:opacity-100 -ml-5 group-hover:ml-0 transition-all" />
@@ -754,6 +781,7 @@ const Landing = () => {
               </div>
             ))}
           </div>
+          
           <div className="pt-8 border-t border-border">
             <div className="flex flex-col md:flex-row items-center justify-between gap-4">
               <span className="text-sm text-muted-foreground">
@@ -773,7 +801,7 @@ const Landing = () => {
       </footer>
 
       <CookieBanner />
-
+      
       <style>{`
         @keyframes gradient {
           0%, 100% { background-position: 0% 50%; }
