@@ -148,7 +148,7 @@ const Landing = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-background overflow-hidden">
+    <div className="min-h-screen bg-background">
       {/* Vlibras Widget Placeholder */}
       <div data-vw="true" className="enabled">
         <div data-vw-access-button="true" className="active"></div>
@@ -280,14 +280,14 @@ const Landing = () => {
 <div className={`relative transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
               <div className="absolute -inset-8 bg-gradient-to-r from-primary/20 to-secondary/20 rounded-3xl blur-3xl animate-pulse" />
 
-              {/* Imagem PNG do Empresário (BEM MAIOR, SEM GRADIENTE) */}
+              {/* Imagem PNG do Empresário (AINDA MAIOR) */}
               <img
                 src="/empresario.png" // Caminho da pasta public
                 alt="Empresário sorrindo com o dashboard do MonitorPro"
-                className="absolute top-24 -right-40 w-[800px] h-auto object-contain z-20 // Tamanho base BEM MAIOR
-                           lg:w-[1000px] lg:-right-64 lg:top-16 // Tamanho e posição LG BEM MAIOR
+                className="absolute top-24 -right-52 w-[900px] h-auto object-contain z-20 // Tamanho base aumentado
+                           lg:w-[1200px] lg:-right-80 lg:top-16 // Tamanho LG aumentado
                            transform transition-transform duration-300 hover:scale-105"
-                // ^^^^^^ CLASSE mask-image REMOVIDA ^^^^^^
+                // ^^^^^^^^^^ VALORES AUMENTADOS NOVAMENTE ^^^^^^^^^^
               />
 
               {/* O Card do Dashboard existente */}
